@@ -1,0 +1,51 @@
+/** @format */
+
+.swiper-wrapper {
+  height: unset !important;
+}
+
+.pricingSection-heading {
+  font-family: "Pacifico", "cursive";
+  font-weight: normal;
+  font-size: 40px;
+  padding-top: 64px;
+  text-align: center;
+  color: #3b6d3a;
+}
+
+.pricingSection-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pricingSection-title-firstHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 35px;
+  color: #3b6d3a;
+}
+
+.pricingSection-title-secondHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 37px;
+  color: #3b6d3a;
+  font-weight: bold;
+}
+
+.dietImage {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  padding-bottom: 54px;
+}
+
+@media (max-width: 480px) {
+  .pricingSection-title-secondHalf,
+  .pricingSection-title-firstHalf {
+    font-size: 24px;
+  }
+}

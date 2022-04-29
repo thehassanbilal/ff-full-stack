@@ -1,0 +1,18 @@
+/** @format */
+
+.whyUscard-container {
+  margin-top: 40px;
+  color: black;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 18px;
+}
+.whyUscard-num {
+  font-family: "Architects Daughter", cursive;
+  font-size: 40px;
+  -webkit-text-fill-color: #9bdc28;
+}
+
+.WhyUsCard_whyUscard-num__hLojv div:first-child {
+  font-family: Poppins;
+}

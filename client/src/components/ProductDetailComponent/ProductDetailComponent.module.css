@@ -1,0 +1,117 @@
+/** @format */
+
+.ProductDetailPage-container {
+  display: flex;
+  background: radial-gradient(
+    circle,
+    rgb(52 124 40) -6%,
+    rgba(35, 39, 40, 1) 84%,
+    rgba(14, 18, 17, 1) 100%
+  );
+  flex-wrap: wrap;
+  padding: 12px 12px 54px 12px;
+  justify-content: space-around;
+}
+
+.ProductDetailPage-imgSide {
+  max-width: 550px;
+  width: 100%;
+}
+
+.ProductDetailPage-img-container img {
+  border-radius: 6px;
+}
+
+.ProductDetailPage-img-container {
+  max-width: 320px;
+  width: 100%;
+  padding: 64px 20px 20px 0;
+}
+.ProductDetailPage-desc {
+  background-color: white;
+  max-width: 550px;
+  width: 100%;
+  padding: 20px;
+}
+
+.ProductDetailPage-imgSide img {
+  width: 100%;
+  max-width: 80%;
+}
+
+.ProductDetailPage-detailSide {
+  max-width: 400px;
+  width: 100%;
+}
+
+dl,
+ol,
+ul {
+  padding: 0;
+}
+
+ul,
+li {
+  font-family: Poppins;
+}
+.ProductDetailPage-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding-top: 34px;
+}
+
+.ProductDetailPage-rating {
+  padding: 10px 0px;
+}
+
+.ProductDetailPage-price-section {
+  background-color: white;
+  padding: 20px 20px 20px 20px;
+}
+
+.ProductDetailPage-price {
+  list-style-type: none;
+  color: #3b6d3a;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: Poppins;
+}
+
+.ProductDetailPage-ctaBtn-container {
+  padding-top: 20px;
+}
+
+.ProductDetailPage-btn {
+  color: #9bdc28;
+  padding: 15px 20px;
+  background-color: #232323;
+  border-radius: 5px;
+  border: none;
+}
+
+.desc {
+  font-family: Poppins;
+}
+
+.ProductDetailPage-btn:hover {
+  color: white;
+}
+
+.ProductDetailPage-flavour-and-weight-container {
+  background-color: white;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.ProductDetailPage-flavour-and-weight {
+  padding: 10px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.ProductDetailPage-nutritionImg img {
+  max-width: 500px;
+  height: 700px;
+  padding-top: 20px;
+}

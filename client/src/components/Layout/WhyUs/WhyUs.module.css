@@ -1,0 +1,95 @@
+/** @format */
+
+@font-face {
+  font-family: matSaleh;
+  src: url(../../../Mat-Saleh.ttf);
+}
+
+.whyUssection-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 64px 0;
+}
+
+.whyUsSection-heading {
+  color: #9bdc28;
+  font-size: 48px !important;
+  font-weight: 500;
+  line-height: 37px;
+  text-align: start;
+  margin-top: 14px;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+  text-shadow: #212529 -3px 3px 0px;
+  -webkit-text-stroke: 2px #212529;
+  -webkit-text-fill-color: #9bdc28;
+  font-family: matSaleh !important;
+}
+
+.whyUsSection-title {
+  display: flex;
+  align-items: center;
+}
+
+.whyUsSection-title-firstHalf,
+.whyUsSection-title-secondHalf {
+  color: #9bdc28;
+  font-size: 38px !important;
+  font-weight: 500;
+  line-height: 37px;
+  text-align: start;
+  margin-top: 14px;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+  text-shadow: #212529 -3px 3px 0px;
+  -webkit-text-stroke: 2px #212529;
+  -webkit-text-fill-color: #9bdc28;
+  font-family: "Balsamiq Sans", cursive;
+}
+
+.whyUsSection-title-secondHalf {
+}
+
+.whyUsSection-desc {
+  text-align: justify;
+  width: 100%;
+  max-width: 480px;
+  color: black;
+  font-family: Poppins;
+  line-height: 28px;
+  font-weight: 400;
+  padding-right: 12px;
+}
+
+.whyUsSection-mini-section-container {
+  display: flex;
+}
+
+.whyUsSection-mini-section-container-rowOne {
+  width: 60%;
+}
+
+.whyUssection-right-whyUs {
+  padding: 0 12px;
+}
+
+@media (max-width: 480px) {
+  .whyUsSection-title-firstHalf,
+  .whyUsSection-title-secondHalf {
+    font-size: 24px;
+  }
+  .whyUsSection-heading {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 892px) {
+  .whyUssection-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .why-us-img {
+    max-width: 380px;
+  }
+}

@@ -1,0 +1,84 @@
+/** @format */
+@font-face {
+  font-family: matSaleh;
+  src: url(../src/Mat-Saleh.ttf);
+}
+
+.btn-reset {
+  outline: none !important;
+  border: none !important;
+}
+
+.main-container {
+  max-width: 1280px;
+  width: 100%;
+  margin: auto;
+}
+
+.pricingSection-heading {
+  color: #9bdc28;
+  font-size: 48px !important;
+  font-weight: 500;
+  line-height: 37px;
+  text-align: center;
+  margin-top: 14px;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+  text-shadow: #212529 -3px 3px 0px;
+  -webkit-text-stroke: 2px #212529;
+  -webkit-text-fill-color: #9bdc28;
+  font-family: matSaleh !important;
+}
+
+.pricingSection-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pricingSection-title-firstHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 35px;
+  color: #3b6d3a;
+}
+
+.pricingSection-title-secondHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 37px;
+  color: #3b6d3a;
+  font-weight: bold;
+}
+
+.line-divider {
+  font-family: "Share Tech Mono", monospace;
+  color: #fff;
+  font-size: 6vh;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.line-divider::before,
+.line-divider::after {
+  content: "";
+  display: block;
+  height: 0.09em;
+  width: 28%;
+}
+.line-divider::before {
+  background: linear-gradient(to left, #9bdc28 -6%, #fff);
+  margin-right: 4vh;
+  border-radius: 2px;
+}
+.line-divider::after {
+  background: linear-gradient(to right, #9bdc28 -6%, #fff);
+  margin-left: 4vh;
+  border-radius: 2px;
+}
+
+.most-popular {
+  padding-bottom: 40px !important;
+}

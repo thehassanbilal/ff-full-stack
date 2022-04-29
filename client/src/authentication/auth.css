@@ -1,0 +1,102 @@
+/** @format */
+
+.form-control {
+  min-height: 41px;
+  box-shadow: none;
+  border-color: #e1e1e1;
+}
+.form-control:focus {
+  border-color: #3b6d3a;
+}
+.form-control,
+.btn {
+  border-radius: 3px;
+}
+.form-header {
+  margin: -30px -30px 20px;
+  padding: 30px 30px 10px;
+  text-align: center;
+
+  background: radial-gradient(
+    circle,
+    rgb(52 124 40) -6%,
+    rgba(35, 39, 40, 1) 84%,
+    rgba(14, 18, 17, 1) 100%
+  );
+  border-bottom: 1px solid #eee;
+  color: #fff;
+}
+.form-header h2 {
+  font-size: 34px;
+  font-weight: bold;
+  margin: 0 0 10px;
+  font-family: "Pacifico", sans-serif;
+}
+.form-header p {
+  margin: 20px 0 15px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 28px;
+  color: white;
+  font-family: Poppins;
+}
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px 12px;
+}
+.signup-form form {
+  color: #999;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 30px;
+}
+.signup-form .form-group {
+  margin-bottom: 20px;
+}
+.signup-form label {
+  font-weight: normal;
+  font-size: 14px;
+  color: black;
+  font-family: Poppins;
+}
+.signup-form input[type="checkbox"] {
+  position: relative;
+  top: 1px;
+}
+.signup-form .btn {
+  font-size: 16px;
+  font-weight: bold;
+  background: radial-gradient(
+    circle,
+    rgb(52 124 40) -6%,
+    rgba(35, 39, 40, 1) 84%,
+    rgba(14, 18, 17, 1) 100%
+  );
+  border: none;
+  min-width: 200px;
+}
+.signup-form .btn:hover,
+.signup-form .btn:focus {
+  background: black !important;
+  outline: none;
+  color: white;
+}
+.signup-form a {
+  color: #3b6d3a;
+  font-family: Poppins;
+}
+
+.already-account {
+  font-family: Poppins;
+}
+.signup-form a:hover {
+  text-decoration: underline !important;
+}
+
+.signup-or-login-error{
+  font-size: 15px;
+  color: red;
+}

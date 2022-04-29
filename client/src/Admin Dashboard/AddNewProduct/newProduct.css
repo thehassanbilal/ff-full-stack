@@ -1,0 +1,185 @@
+/** @format */
+
+.newProductContainer {
+  width: 100%;
+  box-sizing: border-box;
+  height: 200vh;
+  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 14px;
+}
+.newProductContainer h1 {
+  color: rgba(0, 0, 0, 0.733);
+  font: 300 2rem "Roboto";
+  text-align: center;
+}
+
+.createProductForm {
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 0;
+  padding: 2vmax;
+  justify-content: space-evenly;
+
+  width: 100%;
+  max-width: 750px;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
+}
+
+.createProductForm > div {
+  width: 100%;
+  overflow: visible;
+}
+.createProductForm > div > input,
+.createProductForm > div > select,
+.createProductForm > div > textarea {
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  width: 100%;
+  /* justify-content: center; */
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  border-radius: 4px;
+  font: 300 0.9vmax cursive;
+  outline: none;
+  background-color: unset !important;
+}
+
+.createProductForm > div > svg {
+  /* align-items: center; */
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.4vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+
+#createProductFormFile > input {
+  display: flex;
+  padding: 0%;
+}
+
+.add_product_input {
+  margin: unset !important;
+}
+
+#createProductFormFile > input::file-selector-button {
+  cursor: pointer;
+  width: 100%;
+  z-index: 2;
+  height: 5vh;
+  border: none;
+  margin: 0%;
+  font: 400 0.8vmax cursive;
+  transition: all 0.5s;
+  padding: 0 1vmax;
+  color: rgba(0, 0, 0, 0.623);
+  background-color: rgb(255, 255, 255);
+}
+
+#createProductFormFile > input::file-selector-button:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+#createProductFormImage {
+  width: 100%;
+  overflow: auto;
+}
+
+#createProductFormImage > img {
+  width: 12vmax;
+  margin: 0 0.5vmax;
+}
+#createProductBtn {
+  border: none;
+  background: rgb(52 124 40) -6%;
+  color: white;
+  font-weight: 500;
+  font: 18px Poppins;
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+  margin-top: 18px;
+}
+#createProductBtn:hover {
+  border: unset !important;
+}
+
+.MuiInputBase-input {
+  padding: 12px 8px !important;
+}
+.handleTextArea {
+  height: 100px !important;
+  padding: 8px !important;
+  font-size: 1rem !important;
+  outline: lightgray !important;
+}
+
+.handleTextArea::placeholder {
+  color: rgb(159, 159, 159);
+  font-family: Poppins;
+}
+
+.handleTextArea:focus,
+.set-outline:focus {
+  border: 2px solid #004690 !important;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  transform: translate(14px, 0px) scale(0.75) !important;
+  font-size: 12px !important;
+}
+
+.MuiInputLabel-outlined {
+  transform: translate(14px, 12px) scale(1) !important;
+}
+
+.MuiList-padding {
+  padding: unset !important;
+}
+
+.createProductForm > div {
+  margin-top: 18px;
+}
+
+@media screen and (max-width: 600px) {
+  .createProductForm > div > input,
+  .createProductForm > div > select,
+  .createProductForm > div > textarea {
+    padding: 2.5vmax 5vmax;
+    font: 300 1.7vmax cursive;
+  }
+
+  .createProductForm > div > svg {
+    font-size: 2.8vmax;
+  }
+
+  #createProductFormFile > img {
+    width: 8vmax;
+    border-radius: 100%;
+  }
+
+  #createProductFormFile > input::file-selector-button {
+    height: 7vh;
+    font: 400 1.8vmax cursive;
+  }
+
+  #createProductBtn {
+    font: 300 1.9vmax "Roboto";
+    padding: 1.8vmax;
+  }
+}
+.css-b62m3t-container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+}

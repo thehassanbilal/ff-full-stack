@@ -1,0 +1,53 @@
+/** @format */
+.about-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.aboutCoachSection-title {
+  display: flex;
+  align-items: center;
+  padding: 50px 0px 0px 40px;
+}
+
+.aboutCoachSection-title-firstHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 34px;
+  color: #323232;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.aboutCoachSection-title-secondHalf {
+  font-family: Poppins;
+  padding: 10px;
+  font-size: 34px;
+  color: black;
+  font-weight: bold;
+}
+
+.aboutCoachSection-desc-and-Img-container {
+  display: flex;
+  padding: 0px 47px 47px 47px;
+}
+
+.aboutCoachSection-desc-greeting {
+  color: #3b6d3a;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.aboutCoachSection-desc {
+  color: black;
+  font-size: 20px;
+}
+
+.aboutCoachSection-desc-text {
+  list-style-type: none;
+  padding: 0;
+  text-align: justify;
+  font-family: Poppins;
+  line-height: 28px;
+  font-weight: 400;
+}

@@ -1,0 +1,14 @@
+/** @format */
+
+.globle-ctaButton {
+  color: #9bdc28;
+  background-color: #232323;
+  padding: 10px 15px;
+  border: none;
+  font-family: Poppins;
+  font-weight: 500;
+  line-height: 28px;
+  outline: none;
+  margin-top: 12px;
+  border-radius: 5px;
+}

@@ -1,0 +1,261 @@
+/** @format */
+
+.card {
+  max-width: 1258px;
+  margin: auto;
+}
+
+.cart-top {
+  padding: 54px 0 54px 0;
+}
+
+.card-top {
+  padding: 0.7rem 5rem;
+}
+
+.card-top a {
+  float: left;
+  margin-top: 0.7rem;
+}
+
+#logo {
+  font-family: "Dancing Script";
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.handle-padding {
+  padding-left: unset;
+}
+
+.card-body {
+  background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.address-info {
+  width: 100% !important;
+  height: 150px;
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  outline: none;
+  background-color: rgb(247, 247, 247);
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 0 1rem 1rem 1rem;
+    background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .card-top {
+    padding: 0.7rem 1rem;
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+.upper {
+  padding: 1rem 0;
+  justify-content: space-evenly;
+}
+
+.icons {
+  margin-left: auto;
+}
+
+/* form span {
+  color: rgb(179, 179, 179);
+} */
+
+form {
+  padding: 2vh 0;
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247);
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.header {
+  font-size: 1.5rem;
+}
+
+.left {
+  background-color: #ffffff;
+  padding: 2vh;
+}
+
+.left img {
+  width: 2rem;
+}
+
+.left .col-4 {
+  padding-left: 0;
+}
+
+.right .item {
+  padding: 0.3rem 0;
+}
+
+.right {
+  background-color: #ffffff;
+  padding: 2vh;
+}
+
+.col-8 {
+  padding: 0 1vh;
+}
+
+.lower {
+  line-height: 2;
+}
+
+.btn {
+  width: 100%;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+input[type="checkbox"] {
+  width: unset;
+  margin-bottom: unset;
+}
+
+.close {
+  width: 42px;
+  height: 36px;
+  padding: unset;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.close span {
+  margin-top: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  color: #3b6d3a;
+  font-weight: 600;
+  font-size: 24px;
+}
+.modal-body,
+.modal-title {
+  font-family: Poppins;
+}
+
+/* --------------------------------------------- */
+
+.control {
+  margin-bottom: 0.5rem;
+}
+
+.control label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.control input {
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.invalid span {
+  color: #ca3e51;
+}
+.invalid p {
+  color: #ca3e51;
+}
+
+.invalid input,
+textarea {
+  border-color: #aa0b20;
+  background-color: #ffeff1;
+}
+
+.validate {
+  color: red;
+}
+
+.items-main-wraper {
+  height: 270px;
+  overflow: auto;
+}
+
+.btn-submit {
+  display: flex;
+}
+
+.btn-submit button {
+  width: 100%;
+  max-width: 180px;
+  margin-left: auto;
+  padding: 8px 24px;
+}
+
+.popup-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+
+  padding: 50px 24px 0 24px !important;
+  z-index: 999;
+}
+
+.popup-body {
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+}
+
+.order-btn {
+  max-width: 120px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .col-6 {
+    width: 100%;
+  }
+}

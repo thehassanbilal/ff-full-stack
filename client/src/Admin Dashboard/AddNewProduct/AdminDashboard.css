@@ -1,0 +1,166 @@
+/** @format */
+
+html,
+body {
+  height: 100vh;
+}
+
+a {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.nav-wraper {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100%;
+  height: 100vh;
+}
+
+.navbarAdmin {
+  width: 200px;
+  background: radial-gradient(
+    circle,
+    rgb(52 124 40) -6%,
+    rgba(35, 39, 40, 1) 84%,
+    rgba(14, 18, 17, 1) 100%
+  );
+  color: white;
+}
+
+.navbarAdmin header {
+  position: relative;
+  height: 80px;
+  padding: 20px 0 0 15px;
+  font-size: 16px;
+  color: #fff;
+  background: #333333;
+}
+
+.navbarAdmin header span {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  border: 1px solid #fff;
+}
+
+.navbarAdmin ul span {
+  display: block;
+  padding: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  border-bottom: 1px solid #333333;
+}
+
+.navbarAdmin ul a {
+  position: relative;
+  display: block;
+  padding: 14px 14px;
+  text-align: start;
+  color: #fff;
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.navbarAdmin ul a:hover,
+.navbarAdmin ul a.active {
+  background: black;
+}
+
+main {
+  flex: 1;
+  padding: 25px;
+  /* background: #f5f5f5; */
+}
+
+main h1 {
+  height: 80px;
+  margin: -25px -25px 25px -25px;
+  padding: 0 25px;
+  line-height: 76px;
+  font-size: 24px;
+  font-weight: 400;
+  background: #ddd;
+}
+
+.flex-grid {
+  display: flex;
+}
+
+.flex-grid > div {
+  flex: 1;
+  margin: 0 20px 20px 0;
+  padding: 15px;
+  background: #fff;
+}
+
+.flex-grid > div:last-child {
+  margin-right: 0;
+}
+
+.flex-grid h2 {
+  margin: -15px -15px 15px -15px;
+  padding: 12px 15px;
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 1px solid #ddd;
+}
+
+.flex-grid li {
+  position: relative;
+  margin: 0 0 10px;
+  padding: 0 0 0 25px;
+}
+
+.flex-grid li:before {
+  content: "\f00c";
+  font: normal 16px fontawesome;
+  top: 0;
+  left: 0;
+  color: #999;
+}
+
+.home-navigation {
+  position: absolute;
+  bottom: 24px;
+  color: white;
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 16px;
+  padding-left: 14px;
+}
+
+.home-navigation:hover {
+  color: unset;
+  background-color: unset;
+}
+
+.product-section {
+  width: 100%;
+  /* height: 689px !important; */
+  overflow: auto;
+  padding-bottom: 24px;
+}
+
+/*
+** Media Queries
+***********************************************************/
+@media (max-width: 1000px) {
+  .flex-grid {
+    flex-direction: column;
+  }
+
+  .flex-grid > div {
+    margin-right: 0;
+  }
+}
