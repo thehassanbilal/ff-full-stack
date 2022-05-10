@@ -12,7 +12,7 @@ const productSchema = new Schema({
     supplementCategory: { type: String, required: true},
     flavour: [{ type: String, required: true}],
     weight: [{ type: String, required: true}],
-    creator: { type: String, required: true},
+    // creator: { type: String, required: true},
 });
 
 module.exports =  mongoose.model('Product', productSchema);

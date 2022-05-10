@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {API_URL} from "../../services/backendPort";
 import React from "react";
 
-const API_PATH = "http://localhost:5000";
+const API_PATH = API_URL;
 
 export const signupUser = createAsyncThunk(
   "users/signupUser",
@@ -23,6 +24,7 @@ export const signupUser = createAsyncThunk(
       console.log("data", data);
       if (response.status === 200) {
         return { ...data, username: username, email: email };
+        
       } else {
         return thunkAPI.rejectWithValue(data);
       }

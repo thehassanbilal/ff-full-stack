@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {API_URL} from "../services/backendPort";
 const axios = require("axios");
 
-const API_PATH = "http://localhost:9000";
+
+const API_PATH =API_URL;
 
 const headers = {
   method: "GET",
@@ -23,12 +25,13 @@ export const addNewProductThunk = createAsyncThunk(
       name,
       price,
       supplementCategory,
-      images,
+      image,
       flavour,
       weight,
       company,
       desc,
       rating,
+
     },
     thunkAPI
   ) => {
@@ -56,15 +59,25 @@ export const addNewProductThunk = createAsyncThunk(
         body: JSON.stringify({
           name,
           price,
-          rating,
-          desc,
           supplementCategory,
-          images,
-          company,
+          image,
           flavour,
           weight,
+          company,
+          desc,
+          rating,
         }),
       });
+
+      console.log("name", name);
+      console.log("price", price);
+      console.log("supplement category", supplementCategory);
+      console.log("flavour", flavour);
+      console.log("weight", weight);
+      console.log("company", company);
+      console.log("desc", desc);
+      console.log("rating", rating);
+      console.log("image", image);
 
       let data = await response.json();
       console.log("data", data);

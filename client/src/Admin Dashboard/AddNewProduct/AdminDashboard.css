@@ -152,6 +152,14 @@ main h1 {
   padding-bottom: 24px;
 }
 
+.btn-uploadImage{
+  background: rgb(52 124 40) -6%;
+  margin: 10px 0px;
+  padding: 8px;
+  border-radius: 5px;
+  color: white;
+}
+
 /*
 ** Media Queries
 ***********************************************************/

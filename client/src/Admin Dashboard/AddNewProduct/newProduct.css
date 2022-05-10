@@ -151,6 +151,10 @@
   margin-top: 18px;
 }
 
+.addProduct-label{
+  padding: 10px 0px;
+}
+
 @media screen and (max-width: 600px) {
   .createProductForm > div > input,
   .createProductForm > div > select,

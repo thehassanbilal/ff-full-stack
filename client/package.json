@@ -1,6 +1,5 @@
 {
-  "name": "faith-fitness",
-  "homepage": "https://thehassanbilal.github.io/faith-fitness",
+  "name": "",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,6 +17,7 @@
     "@trendmicro/react-sidenav": "^0.5.0",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
+    "firebase": "^9.8.1",
     "gh-pages": "^3.2.3",
     "material-ui-dropzone": "^3.5.0",
     "normalize.css": "^8.0.1",

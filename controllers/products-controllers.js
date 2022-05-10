@@ -72,39 +72,42 @@ const getProductsByUserId = async (req, res, next) => {
 // -----------------------Create Product-----------------------------------------
 
 const createProduct = async (req, res, next) => {
+  console.log("create product envoked!");
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
-  }
+  // if (!errors.isEmpty()) {
+  //   return next(
+  //     new HttpError("Invalid inputs passed, please check your data.", 422)
+  //   );
+  // }
 
   const {
     name,
     desc,
     price,
     rating,
-    // image,
+    image,
     supplementCategory,
     flavour,
     weight,
-    creator,
+    // creator,ap
   } = req.body;
 
   // const title = req.body.title;
   const createdProduct = new Product({
     name,
     price,
-    image: `https://m.media-amazon.com/images/I/81RKTsyPpfL._AC_SL1500_.jpg`,
+    // image: `https://m.media-amazon.com/images/I/81RKTsyPpfL._AC_SL1500_.jpg`,
+    image,
     desc,
     rating,
     supplementCategory,
     flavour,
     weight,
-    creator,
+    // creator,
   });
 
   try {
+    console.log("create product envoked!");
     await createdProduct.save();
   } catch (err) {
     const error = new HttpError(
@@ -142,6 +145,7 @@ const updateProduct = async (req, res, next) => {
   product.desc = desc;
   product.price = price;
   product.rating = rating;
+  product.image = image;
   product.supplementCategory = supplementCategory;
   product.flavour = flavour;
   product.weight = weight;

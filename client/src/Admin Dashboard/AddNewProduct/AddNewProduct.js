@@ -6,11 +6,10 @@ import "../../App.css";
 import { DropzoneArea } from "material-ui-dropzone";
 import { addNewProductThunk } from "../../features/productSlice";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { storage } from "../../../src/firebase";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 const NewProduct = () => {
-  const location = useLocation();
-    console.log(location);
   const dispatch = useDispatch();
   const [selectedFlavours, setSelectedFlavours] = useState([]);
   const [images, setSelectImage] = useState(null);
@@ -57,8 +56,8 @@ const NewProduct = () => {
     e.preventDefault();
     const companyName = company.label;
     const categoryName = category.label;
-    const productWeights = selectedWeights.map(weight => weight.label);
-    const productFlavours = selectedFlavours.map(flavour => flavour.label);
+    const productWeights = selectedWeights.map((weight) => weight.label);
+    const productFlavours = selectedFlavours.map((flavour) => flavour.label);
 
     const data = {
       name,
@@ -67,27 +66,102 @@ const NewProduct = () => {
       desc,
       company: companyName,
       supplementCategory: categoryName,
-      images,
+      image: imgUrl,
       flavour: productFlavours,
       weight: productWeights,
     };
     console.log(data);
 
     dispatch(addNewProductThunk(data));
+  };
 
+  const handleDropZoneImage = (e) => {
+    e.preventDefault();
+
+    const file = e.target[0]?.files[0];
+    if (!file) return;
+    const storageRef = ref(storage, `files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL);
+        });
+      }
+    );
+    // const file = acceptedFiles[0];
+    // if (file) {
+    //   const fileObj = {
+    //     ...file,
+    //     preview: URL.createObjectURL(file),
+    //     fileData: file,
+    //   };
+    //   setSelectImage(fileObj?.preview);
+    // }
+
+    // {
+    //   file && (
+    //     <button className="btn-uploadImage" onClick={imageHandleSubmit}>
+    //       Add Image
+    //     </button>
+    //   );
+    // }
   };
-  const handleDropZoneImage = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      const fileObj = {
-        ...file,
-        preview: URL.createObjectURL(file),
-        fileData: file,
-      };
-      setSelectImage(fileObj?.preview);
-    }
+
+  // ------------------Image upload---------------------------
+
+  const [imgUrl, setImgUrl] = useState(null);
+  const [progresspercent, setProgresspercent] = useState(0);
+
+  const [imageUpload, setimageUpload] = useState(null);
+
+  const imageHandleSubmit = (e) => {
+    console.log("Image upload envoked!");
+    e.preventDefault();
+
+    // const uploadImage = () => {
+    //   if (imageUpload == null) return;
+    //   const imageRef = ref(storage, `images/${imageUpload.name}`);
+    //   uploadBytesResumable(imageRef, imageUpload).then(() => {
+    //     alert("image Uploaded!");
+    //   });
+    // };
+
+    const file = e.target[0]?.files[0];
+    if (!file) return;
+    const storageRef = ref(storage, `files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL);
+        });
+      }
+    );
+    console.log(imgUrl);
   };
-  console.log("For First dropZone", images);
 
   return (
     <Fragment>
@@ -101,8 +175,9 @@ const NewProduct = () => {
             <h1>Create Product</h1>
 
             <div>
+              <label className="addProduct-label">Name :</label>
               <TextField
-                name="name"
+                name="Name"
                 fullWidth
                 className="set-outline"
                 variant="outlined"
@@ -114,6 +189,7 @@ const NewProduct = () => {
               />
             </div>
             <div>
+              <label className="addProduct-label">Price :</label>
               <TextField
                 name="price"
                 fullWidth
@@ -127,6 +203,7 @@ const NewProduct = () => {
               />
             </div>
             <div>
+              <label className="addProduct-label">Rating :</label>
               <TextField
                 name="rating"
                 fullWidth
@@ -142,6 +219,7 @@ const NewProduct = () => {
             </div>
 
             <div>
+              <label className="addProduct-label">Company :</label>
               <Select
                 fullWidth
                 options={companyOptions}
@@ -152,6 +230,7 @@ const NewProduct = () => {
             </div>
 
             <div>
+              <label className="addProduct-label">Description :</label>
               <TextareaAutosize
                 name="desc"
                 fullWidth
@@ -163,6 +242,7 @@ const NewProduct = () => {
             </div>
 
             <div>
+              <label className="addProduct-label">Category :</label>
               <Select
                 fullWidth
                 options={catOptions}
@@ -172,6 +252,7 @@ const NewProduct = () => {
               />
             </div>
             <div>
+              <label className="addProduct-label">Flavour :</label>
               <Select
                 fullWidth
                 isMulti={true}
@@ -185,6 +266,7 @@ const NewProduct = () => {
             </div>
 
             <div>
+              <label className="addProduct-label">Weight :</label>
               <Select
                 isMulti={true}
                 options={supplimentWeights}
@@ -208,14 +290,17 @@ const NewProduct = () => {
               />
             </div> */}
 
-            <DropzoneArea
-              acceptedFiles={["image/*"]}
-              filesLimit={2}
-              file={images}
-              accept= ".jpg,.png,.jpeg"
-              dropzoneText={"Drag and drop an image here or click"}
-              onChange={handleDropZoneImage}
-            />
+            {/* <div>
+              <label className="addProduct-label">Image :</label>
+              <DropzoneArea
+                acceptedFiles={["image/*"]}
+                filesLimit={2}
+                file={images}
+                accept=".jpg,.png,.jpeg"
+                dropzoneText={"Drag and drop an image here or click"}
+                onChange={handleDropZoneImage}
+              />
+            </div> */}
 
             {/* <DropzoneArea
               acceptedFiles={["image/*"]}
@@ -229,6 +314,25 @@ const NewProduct = () => {
               Create
             </Button>
           </form>
+
+          <form onSubmit={imageHandleSubmit} className="form">
+            <label className="addProduct-label">Image :</label>
+            <input type="file" />
+            <button className="btn-uploadImage" type="submit">Upload</button>
+          </form>
+
+          {!imgUrl && (
+            <div className="outerbar">
+              <div
+                className="innerbar"
+                style={{ width: `${progresspercent}%` }}
+              >
+                {progresspercent}%
+              </div>
+            </div>
+          )}
+          {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+
         </div>
       </div>
     </Fragment>

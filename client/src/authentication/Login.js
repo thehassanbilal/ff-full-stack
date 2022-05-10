@@ -85,9 +85,9 @@ function Login() {
             <div className="signup-or-login-error">{errorMessage}</div>
           </div>
         </form>
-        {/* <div className="text-center small already-account">
+        <div className="text-center small already-account">
           Not a member? <Link to="/signup">Register Here</Link>
-        </div> */}
+        </div>
       </div>
     </>
   );
