@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+const axios = require("axios");
 
-const API_PATH = "http://localhost:5000";
+const API_PATH = "http://localhost:9000";
 
 const headers = {
   method: "GET",
@@ -15,11 +16,69 @@ const PostHeaders = {
   },
 };
 // ----------------------------AddNewProduct----------------------------------
-export const addNewProductThunk = createAsyncThunk("addProduct", async () => {
-  const response = await fetch(`${API_PATH}/api/product`, PostHeaders, {});
-  const data = await response.json();
-  return data;
-});
+export const addNewProductThunk = createAsyncThunk(
+  "POSTProduct/addProductThunk",
+  async (
+    {
+      name,
+      price,
+      supplementCategory,
+      images,
+      flavour,
+      weight,
+      company,
+      desc,
+      rating,
+    },
+    thunkAPI
+  ) => {
+    try {
+      //   const formData = new FormData();
+      //   formData.append("name", name);
+      //   formData.append("price", price);
+      //   formData.append("supplementCategory", supplementCategory);
+      //   // formData.append("images", images);
+      //   formData.append("flavour", flavour);
+      //   formData.append("weight", weight);
+      //   formData.append("company", company);
+      //   formData.append("desc", desc);
+      //   formData.append("rating", rating);
+
+      //   for (let [key, value] of formData) {
+      //     console.log(`${key}: ${value}`);
+      //   }
+
+      const response = await fetch(`${API_PATH}/api/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          price,
+          rating,
+          desc,
+          supplementCategory,
+          images,
+          company,
+          flavour,
+          weight,
+        }),
+      });
+
+      let data = await response.json();
+      console.log("data", data);
+      // if (response.status === 200) {
+      //   return { ...data, username: username, email: email };
+      // } else {
+      //   return thunkAPI.rejectWithValue(data);
+      // }
+    } catch (e) {
+      console.log("Error", e.response.data);
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
 
 // ----------------------------------Suppliment Categories-----------------
 
@@ -40,9 +99,8 @@ export const getSelectedCategoryThunk = createAsyncThunk(
   "GETProduct/getSelectedCategoryThunk",
   async () => {
     // console.log("here", name);
-    const response = await fetch(`${API_PATH}/api/products`, headers,
-    );
-    const  data = await response.json();
+    const response = await fetch(`${API_PATH}/api/products`, headers);
+    const data = await response.json();
     return data;
   }
 );
@@ -60,13 +118,12 @@ export const getCompaniesThunk = createAsyncThunk(
 export const getSelectedProductThunk = createAsyncThunk(
   "GETProduct/getSelectedProductThunk",
   async (id) => {
+    console.log("Hello from thunk");
     const response = await fetch(`${API_PATH}/api/products/${id}`, headers);
     const data = await response.json();
     return data;
   }
 );
-
-
 
 const productSlice = createSlice({
   name: "prductSlice",
@@ -114,8 +171,7 @@ const productSlice = createSlice({
       console.log("rejected");
     },
     // --------------------------------------------------------
-    [getSelectedProductThunk.pending]: (state, action) => {
-    },
+    [getSelectedProductThunk.pending]: (state, action) => {},
     [getSelectedProductThunk.fulfilled]: (state, action) => {
       return { ...state, selectedProduct: action.payload };
     },
