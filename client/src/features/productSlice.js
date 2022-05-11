@@ -26,6 +26,7 @@ export const addNewProductThunk = createAsyncThunk(
       price,
       supplementCategory,
       image,
+      nutritionImage,
       flavour,
       weight,
       company,
@@ -61,6 +62,7 @@ export const addNewProductThunk = createAsyncThunk(
           price,
           supplementCategory,
           image,
+          nutritionImage,
           flavour,
           weight,
           company,
@@ -78,6 +80,7 @@ export const addNewProductThunk = createAsyncThunk(
       console.log("desc", desc);
       console.log("rating", rating);
       console.log("image", image);
+      console.log("nutritionImage", nutritionImage);
 
       let data = await response.json();
       console.log("data", data);

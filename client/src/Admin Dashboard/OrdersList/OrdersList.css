@@ -1,0 +1,39 @@
+.ordersListTable-container {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ordersListTable-row{
+}
+
+.ordersListTable-heading {
+}
+
+.ordersListTable-data {
+  height: 100px;
+}
+
+.ordersListTable-data thead{
+  width: 100%;
+
+}
+
+.productListTable-row{
+    overflow: scroll;
+} 
+
+.productListTable-heading {
+}
+
+.productsListTable-data {
+}
+
+th,
+td {
+  padding: 8px;
+  border: 1px solid #dee2e6;
+}
+th {
+  height: 40px;
+  text-align: left;
+}

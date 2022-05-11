@@ -1,10 +1,7 @@
 /** @format */
 
 import React, { useEffect } from "react";
-import CategoriesBlock from "../../../components/CategoriesBlock/CategoriesBlock";
-import { Banner } from "../../../components/Layout/Banner/Banner";
 import SwiperSlider from "../../../components/SwiperSliders/SwiperSlider";
-import axios from "axios";
 import "./SelectedProductCategory.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +19,7 @@ const SelectedProductCategory = () => {
   const selectedCategory = useSelector(
     (state) => state.productSlice.selectedCategory
   );
+  console.log(selectedCategory);
   
   const products = selectedCategory.products;
   console.log(products);

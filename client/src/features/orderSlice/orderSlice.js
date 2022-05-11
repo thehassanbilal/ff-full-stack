@@ -3,6 +3,24 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const API_PATH = "http://localhost:5000";
 
+const headers = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export const getOrdersThunk = createAsyncThunk(
+  "GETOrders/getOrdersThunk",
+  async () => {
+    console.log("Get Orders envoked!");
+    const response = await fetch(`${API_PATH}/api/orders`, headers);
+    const data = await response.json();
+    return data;
+  }
+);
+
+
 export const placeOrderThunk = createAsyncThunk(
   "POSTPlaceOrder/placeOrderThunk",
   async ({
@@ -38,9 +56,18 @@ export const placeOrderThunk = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: "order",
-  initialState: { emptorData: [] },
+  initialState: { emptorData: [], orders: [] },
   reducers: {},
   extraReducers: {
+    [getOrdersThunk.pending]: (state, action) => {
+      console.log("pending");
+    },
+    [getOrdersThunk.fulfilled]: (state, action) => {
+      return { ...state, orders: action.payload };
+    },
+    [getOrdersThunk.rejected]: (state, action) => {
+      console.log("rejected");
+    },
     [placeOrderThunk.pending]: (state, action) => {
       console.log("pending");
     },
@@ -52,4 +79,5 @@ const orderSlice = createSlice({
     },
   },
 });
+
 export default orderSlice.reducer;

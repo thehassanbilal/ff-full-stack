@@ -86,6 +86,7 @@ const createProduct = async (req, res, next) => {
     price,
     rating,
     image,
+    nutritionImage,
     supplementCategory,
     flavour,
     weight,
@@ -96,8 +97,8 @@ const createProduct = async (req, res, next) => {
   const createdProduct = new Product({
     name,
     price,
-    // image: `https://m.media-amazon.com/images/I/81RKTsyPpfL._AC_SL1500_.jpg`,
     image,
+    nutritionImage,
     desc,
     rating,
     supplementCategory,
@@ -146,6 +147,7 @@ const updateProduct = async (req, res, next) => {
   product.price = price;
   product.rating = rating;
   product.image = image;
+  product.nutritionImage = nutritionImage;
   product.supplementCategory = supplementCategory;
   product.flavour = flavour;
   product.weight = weight;

@@ -6,6 +6,21 @@ const HttpError = require("../models/http-error");
 const Order = require("../models/order");
 const User = require("../models/user");
 
+const getOrders = async (req, res, next) => {
+  try {
+    const orders = await Order.find({});
+    res.json({
+      orders: orders.map((order) => order.toObject({ getters: true })),
+    });
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching orders failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+};
+
 const getOrderById = async (req, res, next) => {
   const orderId = req.params.pid;
 
@@ -140,6 +155,7 @@ const deleteOrder = async (req, res, next) => {
   res.status(200).json({ message: "Deleted order." });
 };
 
+exports.getOrders = getOrders;
 exports.getOrderById = getOrderById;
 exports.getOrdersByUserId = getOrdersByUserId;
 exports.createOrder = createOrder;

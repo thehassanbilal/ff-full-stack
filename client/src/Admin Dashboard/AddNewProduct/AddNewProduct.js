@@ -8,6 +8,8 @@ import { addNewProductThunk } from "../../features/productSlice";
 import { useDispatch } from "react-redux";
 import { storage } from "../../../src/firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 
 const NewProduct = () => {
   const dispatch = useDispatch();
@@ -67,6 +69,7 @@ const NewProduct = () => {
       company: companyName,
       supplementCategory: categoryName,
       image: imgUrl,
+      nutritionImage: nutritionImgUrl,
       flavour: productFlavours,
       weight: productWeights,
     };
@@ -75,54 +78,40 @@ const NewProduct = () => {
     dispatch(addNewProductThunk(data));
   };
 
-  const handleDropZoneImage = (e) => {
-    e.preventDefault();
+  // const handleDropZoneImage = (e) => {
+  //   e.preventDefault();
 
-    const file = e.target[0]?.files[0];
-    if (!file) return;
-    const storageRef = ref(storage, `files/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  //   const file = e.target[0]?.files[0];
+  //   if (!file) return;
+  //   const storageRef = ref(storage, `files/${file.name}`);
+  //   const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgresspercent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL);
-        });
-      }
-    );
-    // const file = acceptedFiles[0];
-    // if (file) {
-    //   const fileObj = {
-    //     ...file,
-    //     preview: URL.createObjectURL(file),
-    //     fileData: file,
-    //   };
-    //   setSelectImage(fileObj?.preview);
-    // }
-
-    // {
-    //   file && (
-    //     <button className="btn-uploadImage" onClick={imageHandleSubmit}>
-    //       Add Image
-    //     </button>
-    //   );
-    // }
-  };
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       const progress = Math.round(
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //       );
+  //       setProgresspercent(progress);
+  //     },
+  //     (error) => {
+  //       alert(error);
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+  //         setImgUrl(downloadURL);
+  //       });
+  //     }
+  //   );
+  // };
 
   // ------------------Image upload---------------------------
 
   const [imgUrl, setImgUrl] = useState(null);
-  const [progresspercent, setProgresspercent] = useState(0);
+   const [progresspercent, setProgresspercent] = useState(0);
+
+  const [nutritionImgUrl, setNutritionImgUrl] = useState(null);
+  const [nutritionProgresspercent, setNutritionProgresspercent] = useState(0);
 
   const [imageUpload, setimageUpload] = useState(null);
 
@@ -130,14 +119,6 @@ const NewProduct = () => {
     console.log("Image upload envoked!");
     e.preventDefault();
 
-    // const uploadImage = () => {
-    //   if (imageUpload == null) return;
-    //   const imageRef = ref(storage, `images/${imageUpload.name}`);
-    //   uploadBytesResumable(imageRef, imageUpload).then(() => {
-    //     alert("image Uploaded!");
-    //   });
-    // };
-
     const file = e.target[0]?.files[0];
     if (!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
@@ -160,8 +141,44 @@ const NewProduct = () => {
         });
       }
     );
-    console.log(imgUrl);
   };
+
+  // ----------------------Nutrition Image Upload----------------------------
+
+  const nutriitonImageHandleSubmit = (e) => {
+    e.preventDefault();
+
+    const file = e.target[0]?.files[0];
+    if (!file) return;
+    const storageRef = ref(storage, `files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setNutritionProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setNutritionImgUrl(downloadURL);
+        });
+      }
+    );
+  };
+
+  // -------------------------Upload Progressbar-----------------------------
+
+  const now = progresspercent;
+  const progressInstance = <ProgressBar now={now} label={`${now}%`} />;
+
+  const nutritionNow = nutritionProgresspercent;
+   const nutritionProgressInstance = <ProgressBar now={nutritionNow} label={`${nutritionNow}%`} />;
 
   return (
     <Fragment>
@@ -314,25 +331,70 @@ const NewProduct = () => {
               Create
             </Button>
           </form>
+        </div>
 
-          <form onSubmit={imageHandleSubmit} className="form">
-            <label className="addProduct-label">Image :</label>
-            <input type="file" />
-            <button className="btn-uploadImage" type="submit">Upload</button>
-          </form>
+        <div className="imageupload-section">
+          <div className="product-ImageUpload-container">
+            <form onSubmit={imageHandleSubmit} className="form-productImage">
+              <label className="addProduct-label">Product Image :</label>
+              <input type="file" />
+              {!imgUrl && (
+                <button className="btn-uploadImage" type="submit">
+                  Upload
+                </button>
+              )}
+            </form>
 
-          {!imgUrl && (
-            <div className="outerbar">
-              <div
-                className="innerbar"
-                style={{ width: `${progresspercent}%` }}
-              >
-                {progresspercent}%
+            {!imgUrl && (
+              <div className="outerbar">
+                <div
+                  className="innerbar"
+                  style={{ width: `${progresspercent}%` }}
+                >
+                  {progressInstance}
+                </div>
               </div>
-            </div>
-          )}
-          {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+            )}
+            {imgUrl && (
+              <div className="imageuploaded-successfully">
+                <p>
+                  Uploaded Successfully <DoneOutlineIcon />{" "}
+                </p>
+                <img src={imgUrl} alt="uploaded file" height={200} />
+              </div>
+            )}
+          </div>
+                <hr/>
+          <div className="product-ImageUpload-container">
+            <form onSubmit={nutriitonImageHandleSubmit} className="form-productImage">
+              <label className="addProduct-label">Nutrition Image :</label>
+              <input type="file" />
+              {!nutritionImgUrl && (
+                <button className="btn-uploadImage" type="submit">
+                  Upload
+                </button>
+              )}
+            </form>
 
+            {!nutritionImgUrl && (
+              <div className="outerbar">
+                <div
+                  className="innerbar"
+                  style={{ width: `${nutritionProgresspercent}%` }}
+                >
+                  {nutritionProgressInstance}
+                </div>
+              </div>
+            )}
+            {nutritionImgUrl && (
+              <div className="imageuploaded-successfully">
+                <p>
+                  Uploaded Successfully <DoneOutlineIcon />{" "}
+                </p>
+                <img src={nutritionImgUrl} alt="uploaded file" height={200} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </Fragment>
