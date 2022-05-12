@@ -69,8 +69,7 @@ const getOrdersByUserId = async (req, res, next) => {
   }
 
   res.json({
-    orders: userWithOrders.orders.map((order) =>
-      order.toObject({ getters: true })
+    orders: userWithOrders.orders.map((order) => order.toObject({ getters: true })
     ),
   });
 };

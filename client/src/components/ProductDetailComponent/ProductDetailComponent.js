@@ -10,27 +10,31 @@ import img from "../../assets/products/DUMMY_PRODUCTS/1.jpg";
 const ProductDetailComponent = ({data}) => {
   const {product} = data;
   console.log(product);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const {
-    id,
-    name,
-    price,
-    desc,
-    weight,
-    flavour,
-  } = product;
+  // const {
+  //   name,
+  //   image,
+  //   nutritionImage,
+  //   rating,
+  //   price,
+  //   desc,
+  //   weight,
+  //   flavour,
+  // } = product;
 
-  const addToCartHandler = () => {
-    dispatch(
-      cartActions.addItemToCart({
-        id,
-        name,
-        price,
-        desc,
-      })
-    );
-  };
+  // console.log(product);
+
+  // const addToCartHandler = () => {
+  //   dispatch(
+  //     cartActions.addItemToCart({
+  //       id,
+  //       name,
+  //       price,
+  //       desc,
+  //     })
+  //   );
+  // };
 
   // const productImg = `http://localhost:1337${data?.product_img?.[0]?.url}`;
   // const nutritionImg = `http://localhost:1337${data?.nutrition_img?.[0]?.url}`;
@@ -39,20 +43,20 @@ const ProductDetailComponent = ({data}) => {
     <div className={classes["ProductDetailPage-container"]}>
       <div className={classes["ProductDetailPage-imgSide"]}>
         <div className={classes["ProductDetailPage-img-container"]}>
-          {/* <img src={img} /> */}
+          <img src={product?.image} />
         </div>
         <div className={classes["ProductDetailPage-desc"]}>
           <h3 className={classes["desc"]}>Description:</h3>
-          <p>{desc}</p>
+          <p>{product?.desc}</p>
         </div>
       </div>
       <div className={classes["ProductDetailPage-detailSide"]}>
-        <p className={classes["ProductDetailPage-name"]}>{name}</p>
+        <p className={classes["ProductDetailPage-name"]}>{product?.name}</p>
 
         <div className={classes["ProductDetailPage-price-section"]}>
           <ul>
             <li className={classes["ProductDetailPage-price"]}>
-              Rs {price}
+              Rs {product.price}
             </li>
             <li>Cash On Delivery</li>
             <li>2-3 days Delivery</li>
@@ -64,12 +68,11 @@ const ProductDetailComponent = ({data}) => {
         <div
           className={classes["ProductDetailPage-flavour-and-weight-container"]}
         >
-
           <select
             className={classes["ProductDetailPage-flavour-and-weight"]}
             name="flavor"
           >
-            {flavour?.map((flavor) => (
+            {product.flavour?.map((flavor) => (
               <option className={classes["option"]}>{flavor}</option>
             ))}
           </select>
@@ -78,7 +81,7 @@ const ProductDetailComponent = ({data}) => {
             className={classes["ProductDetailPage-flavour-and-weight"]}
             name="flavor"
           >
-            {weight?.map((weight) => (
+            {product?.weight?.map((weight) => (
               <option className={classes["option"]}>{weight}</option>
             ))}
           </select>
@@ -86,16 +89,16 @@ const ProductDetailComponent = ({data}) => {
         <div className={classes["ProductDetailPage-ctaBtn-container"]}>
           <button
             className={classes["ProductDetailPage-btn"]}
-            onClick={addToCartHandler}
+            // onClick={addToCartHandler}
           >
             ADD TO CART
           </button>
         </div>
-        {/* {!nutritionImg && (
+        {product?.nutritionImage && 
           <div className={classes["ProductDetailPage-nutritionImg"]}>
-            <img src={nutritionImg} alt="⚠ Nutrition Image not Available!" />
+            <img src={product?.nutritionImage} alt="⚠ Nutrition Image not Available!" />
           </div>
-        )} */}
+        }
       </div>
     </div>
   );

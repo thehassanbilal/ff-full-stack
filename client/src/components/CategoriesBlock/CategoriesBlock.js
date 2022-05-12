@@ -12,7 +12,6 @@ const CategoriesBlock = ({ data }) => {
             <div className={classes["categories-block-category-container"]}>
               <img
                 className={classes["categories-block-category-img"]}
-                // src={`http://localhost:1337${category?.img?.[0]?.url}`}
                 src={category?.img}
                 alt="name"
               />
@@ -21,7 +20,6 @@ const CategoriesBlock = ({ data }) => {
               </div>
             </div>
           </Link>
-          <Outlet />
         </>
       ))}
     </div>

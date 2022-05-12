@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getSelectedProductThunk,
-  removeSelectedProduct,
+  getSelectedProductThunk
 } from "../../features/productSlice";
 import { useParams } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const ProductDetailPage = () => {
   const dispatch = useDispatch();
 
   const product = useSelector(
-    (state) => state.productSlice.selectedProduct
+    (state) => state?.productSlice?.selectedProduct
   );
 
   useEffect(() => {

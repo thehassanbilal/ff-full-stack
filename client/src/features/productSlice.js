@@ -113,10 +113,10 @@ export const getProductCategoriesThunk = createAsyncThunk(
 
 export const getSelectedCategoryThunk = createAsyncThunk(
   "GETProduct/getSelectedCategoryThunk",
-  async () => {
-    // console.log("here", name);
-    const response = await fetch(`${API_PATH}/api/products`, headers);
+  async (productCategoryFromParams) => {
+    const response = await fetch(`${API_PATH}/api/products/category/${productCategoryFromParams}`, headers);
     const data = await response.json();
+    console.log("according data", data);
     return data;
   }
 );

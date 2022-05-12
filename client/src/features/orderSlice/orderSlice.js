@@ -55,7 +55,7 @@ export const placeOrderThunk = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: "order",
-  initialState: { emptorData: [], orders: [] },
+  initialState: { isFetching: false, emptorData: [], orders: [] },
   reducers: {},
   extraReducers: {
     [getOrdersThunk.pending]: (state, action) => {
@@ -68,6 +68,7 @@ const orderSlice = createSlice({
       console.log("rejected");
     },
     [placeOrderThunk.pending]: (state, action) => {
+      state.isFetching = true;
       console.log("pending");
     },
     [placeOrderThunk.fulfilled]: (state, action) => {

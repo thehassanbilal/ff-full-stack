@@ -20,11 +20,36 @@ const getProducts = async (req, res, next) => {
 };
 
 const getProductById = async (req, res, next) => {
+  console.log("get product by id envoked");
   const productId = req.params.pid;
+  
 
   let product;
   try {
     product = await Product.findById(productId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not find a product.",
+      500
+    );
+    return next(error);
+  }
+
+  if (!product) {
+    const error = new HttpError(
+      "Could not find a product for the provided id.",
+      404
+    );
+    return next(error);
+  }
+  res.json({ product: product.toObject({ getters: true }) });
+};
+
+const getProductByCategory = async (req, res, next) => {
+  const productCategory = req.params.name;
+  let product;
+  try {
+    product = await Product.find({ supplementCategory: productCategory });
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not find a product here.",
@@ -40,7 +65,10 @@ const getProductById = async (req, res, next) => {
     );
     return next(error);
   }
-  res.json({ product: product.toObject({ getters: true }) });
+  res.json({
+    products: product.map((product) => product.toObject({ getters: true })),
+  });
+  // res.json({ product: product.toObject({ getters: true }) });
 };
 
 const getProductsByUserId = async (req, res, next) => {
@@ -72,7 +100,6 @@ const getProductsByUserId = async (req, res, next) => {
 // -----------------------Create Product-----------------------------------------
 
 const createProduct = async (req, res, next) => {
-  console.log("create product envoked!");
   const errors = validationResult(req);
   // if (!errors.isEmpty()) {
   //   return next(
@@ -90,10 +117,11 @@ const createProduct = async (req, res, next) => {
     supplementCategory,
     flavour,
     weight,
-    // creator,ap
+    // creator,
   } = req.body;
 
-  // const title = req.body.title;
+  const supplementCategoryUppercaseName  = supplementCategory.toUpperCase();
+  
   const createdProduct = new Product({
     name,
     price,
@@ -101,7 +129,7 @@ const createProduct = async (req, res, next) => {
     nutritionImage,
     desc,
     rating,
-    supplementCategory,
+    supplementCategory : supplementCategoryUppercaseName,
     flavour,
     weight,
     // creator,
@@ -199,6 +227,7 @@ const deleteProduct = async (req, res, next) => {
 
 exports.getProductById = getProductById;
 exports.getProducts = getProducts;
+exports.getProductByCategory = getProductByCategory;
 exports.getProductsByUserId = getProductsByUserId;
 exports.createProduct = createProduct;
 exports.updateProduct = updateProduct;

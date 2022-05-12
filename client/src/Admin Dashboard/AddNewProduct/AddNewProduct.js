@@ -17,7 +17,7 @@ const NewProduct = () => {
   const [images, setSelectImage] = useState(null);
 
   const catOptions = [
-    { value: "protien", label: "Protien" },
+    { value: "protein", label: "Protein" },
     { value: "fatBurner", label: "Fat Burner" },
     { value: "aminoAcid", label: "Amino Acid" },
     { value: "preWorkout", label: "Pre Workout" },
@@ -77,33 +77,6 @@ const NewProduct = () => {
 
     dispatch(addNewProductThunk(data));
   };
-
-  // const handleDropZoneImage = (e) => {
-  //   e.preventDefault();
-
-  //   const file = e.target[0]?.files[0];
-  //   if (!file) return;
-  //   const storageRef = ref(storage, `files/${file.name}`);
-  //   const uploadTask = uploadBytesResumable(storageRef, file);
-
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       const progress = Math.round(
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //       );
-  //       setProgresspercent(progress);
-  //     },
-  //     (error) => {
-  //       alert(error);
-  //     },
-  //     () => {
-  //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //         setImgUrl(downloadURL);
-  //       });
-  //     }
-  //   );
-  // };
 
   // ------------------Image upload---------------------------
 
@@ -294,38 +267,7 @@ const NewProduct = () => {
                 }
               />
             </div>
-            {/* <div>
-              <TextField
-                fullWidth
-                className="set-outline"
-                variant="outlined"
-                type="text"
-                placeholder="Company Name"
-                required
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-              />
-            </div> */}
 
-            {/* <div>
-              <label className="addProduct-label">Image :</label>
-              <DropzoneArea
-                acceptedFiles={["image/*"]}
-                filesLimit={2}
-                file={images}
-                accept=".jpg,.png,.jpeg"
-                dropzoneText={"Drag and drop an image here or click"}
-                onChange={handleDropZoneImage}
-              />
-            </div> */}
-
-            {/* <DropzoneArea
-              acceptedFiles={["image/*"]}
-              filesLimit={1}
-              dropzoneText={
-                "Drag and drop and add nutrition image here or click"
-              }
-            /> */}
 
             <Button id="createProductBtn" type="submit" className="btn-reset">
               Create

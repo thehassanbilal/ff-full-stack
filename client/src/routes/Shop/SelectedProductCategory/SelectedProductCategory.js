@@ -5,28 +5,32 @@ import SwiperSlider from "../../../components/SwiperSliders/SwiperSlider";
 import "./SelectedProductCategory.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSelectedCategoryThunk,
-  removeSelectedCategoryProduct,
-} from "../../../features/productSlice";
+import { getSelectedCategoryThunk } from "../../../features/productSlice";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import "../../../App.css";
 
 const SelectedProductCategory = () => {
   const dispatch = useDispatch();
+
   let { name } = useParams();
+
+  // const paramsToLowerCase = name.toLowerCase();
+  // const paramsToUpperCase = paramsToLowerCase.charAt(0).toUpperCase() + paramsToLowerCase.slice(1);
+  const productCategoryFromParams = name.replaceAll("-", " ");
+
+  console.log(productCategoryFromParams);
 
   const selectedCategory = useSelector(
     (state) => state.productSlice.selectedCategory
   );
   console.log(selectedCategory);
-  
+
   const products = selectedCategory.products;
   console.log(products);
 
   useEffect(async () => {
     console.log("i am in useEffect");
-    dispatch(getSelectedCategoryThunk(name));
+    dispatch(getSelectedCategoryThunk(productCategoryFromParams));
   }, []);
 
   return (
@@ -37,7 +41,7 @@ const SelectedProductCategory = () => {
         </div>
         <p className="SelectedProductCategory-param"></p>
         <h1 className="pricingSection-heading line-divider">
-         {name}
+          {productCategoryFromParams}
         </h1>
 
         <div className="SelectedProductCategory-products">
@@ -54,7 +58,7 @@ const SelectedProductCategory = () => {
         </div>
       </div>
 
-      <SwiperSlider heading={`Most Popular in ${name}`} />
+      <SwiperSlider heading={`Most Popular in ${productCategoryFromParams}`} />
     </>
   );
 };
