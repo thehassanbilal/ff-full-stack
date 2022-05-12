@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrdersThunk, orderListData } from "../../features/orderSlice/orderSlice";
+import {
+  getOrdersThunk,
+  orderListData,
+} from "../../features/orderSlice/orderSlice";
 import { getSelectedProductThunk } from "../../features/productSlice";
 import "./OrdersList.css";
 
@@ -47,7 +50,7 @@ const rows = [
       },
     ],
   },
-]
+];
 
 // localStorage.setItem('ordersArray', JSON.stringify(orders))
 // const orders= JSON.parse(localStorage.getItem('ordersArray'))
@@ -55,13 +58,12 @@ const rows = [
 const OrdersList = () => {
   const dispatch = useDispatch();
   const ordersList = useSelector((state) => state?.orderSlice?.orders);
-  const {orders} = ordersList;
+  const { orders } = ordersList;
 
   console.log(orders);
 
   useEffect(async () => {
     dispatch(getOrdersThunk());
-    dispatch(getSelectedProductThunk(ordersList.orders.id))
   }, []);
 
   return (
@@ -99,7 +101,7 @@ const OrdersList = () => {
                     <tbody>
                       <tr className="productsListTable-row">
                         <td className="productsListTable-data">
-                          {product.productId}
+                          {product.name}
                         </td>
                         <td className="productsListTable-data">
                           {product.quantity}

@@ -14,6 +14,7 @@ function CheckoutItems() {
 
   const idAndQuantity = cartData?.map((e) => ({
     productId: e?.id,
+    name: e?.name,
     quantity: e?.quantity,
   }));
   

@@ -13,7 +13,6 @@ const headers = {
 export const getOrdersThunk = createAsyncThunk(
   "GETOrders/getOrdersThunk",
   async () => {
-    console.log("Get Orders envoked!");
     const response = await fetch(`${API_PATH}/api/orders`, headers);
     const data = await response.json();
     return data;
