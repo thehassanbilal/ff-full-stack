@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrdersThunk } from "../../features/orderSlice/orderSlice";
+import { getOrdersThunk, orderListData } from "../../features/orderSlice/orderSlice";
 import "./OrdersList.css";
 
 const rows = [
@@ -12,11 +12,11 @@ const rows = [
     address: "44 Ex parkview DHA Ph8",
     products: [
       {
-        name: "C4",
+        productId: "C4",
         quantity: 4,
       },
       {
-        name: "Cretein",
+        productId: "Cretein",
         quantity: 5,
       },
     ],
@@ -29,15 +29,15 @@ const rows = [
     address: "44 Ex parkview DHA Ph8",
     products: [
       {
-        name: "C4",
+        productId: "C4",
         quantity: 4,
       },
       {
-        name: "Cretein",
+        productId: "Cretein",
         quantity: 5,
       },
       {
-        name: "C4",
+        productId: "C4",
         quantity: 4,
       },
       {
@@ -51,9 +51,9 @@ const rows = [
 const OrdersList = () => {
   const dispatch = useDispatch();
 
-  const ordersList = useSelector((state) => state?.orderSlice?.orders);
+  const {orders} = useSelector((state) => state?.orderSlice?.orders);
 
-  console.log(ordersList);
+  console.log(orders);
 
   useEffect(async () => {
     dispatch(getOrdersThunk());
@@ -72,12 +72,12 @@ const OrdersList = () => {
           <th className="ordersListTable-heading">Products</th>
         </tr>
       </thead>
-      {rows.map((row, i) => {
+      {orders.map((row, i) => {
         return (
           <tbody>
             <tr className="ordersListTable-row">
               <td className="ordersListTable-data">{i}</td>
-              <td className="ordersListTable-data">{row.name}</td>
+              <td className="ordersListTable-data">{row.fullName}</td>
               <td className="ordersListTable-data">{row.email}</td>
               <td className="ordersListTable-data">{row.contact}</td>
               <td className="ordersListTable-data">{row.postalCode}</td>
@@ -94,7 +94,7 @@ const OrdersList = () => {
                     <tbody>
                       <tr className="productsListTable-row">
                         <td className="productsListTable-data">
-                          {product.name}
+                          {product.productId}
                         </td>
                         <td className="productsListTable-data">
                           {product.quantity}

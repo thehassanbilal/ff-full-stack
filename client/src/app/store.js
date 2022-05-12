@@ -10,7 +10,7 @@ const store = configureStore({
     ui: uiSlice.reducer,
     productSlice: productSlice,
     cart: cartSlice.reducer,
-    orderSlice: orderSlice.reducer,
+    orderSlice: orderSlice,
     user: userSlice.reducer,
   },
 });
