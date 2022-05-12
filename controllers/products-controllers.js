@@ -27,7 +27,7 @@ const getProductById = async (req, res, next) => {
     product = await Product.findById(productId);
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not find a product.",
+      "Something went wrong, could not find a product here.",
       500
     );
     return next(error);

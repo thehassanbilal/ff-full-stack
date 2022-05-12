@@ -63,7 +63,6 @@ const orderSlice = createSlice({
       console.log("pending");
     },
     [getOrdersThunk.fulfilled]: (state, action) => {
-      console.log(action.payload);
       return { ...state, orders: action.payload };
     },
     [getOrdersThunk.rejected]: (state, action) => {

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrdersThunk, orderListData } from "../../features/orderSlice/orderSlice";
+import { getSelectedProductThunk } from "../../features/productSlice";
 import "./OrdersList.css";
 
 const rows = [
@@ -46,17 +47,21 @@ const rows = [
       },
     ],
   },
-];
+]
+
+// localStorage.setItem('ordersArray', JSON.stringify(orders))
+// const orders= JSON.parse(localStorage.getItem('ordersArray'))
 
 const OrdersList = () => {
   const dispatch = useDispatch();
-
-  const {orders} = useSelector((state) => state?.orderSlice?.orders);
+  const ordersList = useSelector((state) => state?.orderSlice?.orders);
+  const {orders} = ordersList;
 
   console.log(orders);
 
   useEffect(async () => {
     dispatch(getOrdersThunk());
+    dispatch(getSelectedProductThunk(ordersList.orders.id))
   }, []);
 
   return (
@@ -72,7 +77,7 @@ const OrdersList = () => {
           <th className="ordersListTable-heading">Products</th>
         </tr>
       </thead>
-      {orders.map((row, i) => {
+      {orders?.map((row, i) => {
         return (
           <tbody>
             <tr className="ordersListTable-row">
