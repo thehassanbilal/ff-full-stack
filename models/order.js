@@ -17,6 +17,8 @@ const orderSchema = new Schema({
       },
       name: {type: String, required: true},
       quantity: { type: Number, required: true },
+      flavour: {type: String, required: true},
+      weight: {type: String, required: true},
     },
   ],
   totalToPay: { type: Number, required: true },

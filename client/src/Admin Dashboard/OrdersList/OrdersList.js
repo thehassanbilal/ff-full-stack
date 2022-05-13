@@ -52,6 +52,8 @@ const OrdersList = () => {
                     <tr className="productListTable-row">
                       <th className="productListTable-heading">Name</th>
                       <th className="productListTable-heading">Qty.</th>
+                      <th className="productListTable-heading">Flavour</th>
+                      <th className="productListTable-heading">Weight</th>
                     </tr>
                   </thead>
                   {row.products.map((product) => {
@@ -64,6 +66,13 @@ const OrdersList = () => {
                           <td className="productsListTable-data">
                             {product.quantity}
                           </td>
+                          <td className="productsListTable-data">
+                            {product.quantity}
+                          </td>
+                          <td className="productsListTable-data">
+                            {product.quantity}
+                          </td>
+                          
                         </tr>
                       </tbody>
                     );

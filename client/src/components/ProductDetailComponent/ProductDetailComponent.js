@@ -10,7 +10,7 @@ import img from "../../assets/products/DUMMY_PRODUCTS/1.jpg";
 const ProductDetailComponent = ({data}) => {
   const {product} = data;
   console.log(product);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // const {
   //   name,
@@ -23,21 +23,25 @@ const ProductDetailComponent = ({data}) => {
   //   flavour,
   // } = product;
 
+  console.log(product?.name);
+
   // console.log(product);
 
-  // const addToCartHandler = () => {
-  //   dispatch(
-  //     cartActions.addItemToCart({
-  //       id,
-  //       name,
-  //       price,
-  //       desc,
-  //     })
-  //   );
-  // };
+  const id = product?.id;
+  const name = product?.name;
+  const price = product?.price;
+  const desc = product?.desc;
 
-  // const productImg = `http://localhost:1337${data?.product_img?.[0]?.url}`;
-  // const nutritionImg = `http://localhost:1337${data?.nutrition_img?.[0]?.url}`;
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        name,
+        price,
+        desc,
+      })
+    );
+  };
 
   return (
     <div className={classes["ProductDetailPage-container"]}>
@@ -56,7 +60,7 @@ const ProductDetailComponent = ({data}) => {
         <div className={classes["ProductDetailPage-price-section"]}>
           <ul>
             <li className={classes["ProductDetailPage-price"]}>
-              Rs {product.price}
+              Rs {product?.price}
             </li>
             <li>Cash On Delivery</li>
             <li>2-3 days Delivery</li>
@@ -72,7 +76,7 @@ const ProductDetailComponent = ({data}) => {
             className={classes["ProductDetailPage-flavour-and-weight"]}
             name="flavor"
           >
-            {product.flavour?.map((flavor) => (
+            {product?.flavour?.map((flavor) => (
               <option className={classes["option"]}>{flavor}</option>
             ))}
           </select>
@@ -89,7 +93,7 @@ const ProductDetailComponent = ({data}) => {
         <div className={classes["ProductDetailPage-ctaBtn-container"]}>
           <button
             className={classes["ProductDetailPage-btn"]}
-            // onClick={addToCartHandler}
+            onClick={addToCartHandler}
           >
             ADD TO CART
           </button>

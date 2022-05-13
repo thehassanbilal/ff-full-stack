@@ -162,7 +162,7 @@ const NewProduct = () => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Add Product</h1>
 
             <div>
               <label className="addProduct-label">Name :</label>
