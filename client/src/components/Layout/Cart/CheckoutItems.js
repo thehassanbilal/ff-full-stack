@@ -16,6 +16,8 @@ function CheckoutItems() {
     productId: e?.id,
     name: e?.name,
     quantity: e?.quantity,
+    flavour: e?.flavour,
+    weight: e?.weight,
   }));
   
   const [popUp, setPopUp] = useState(false);

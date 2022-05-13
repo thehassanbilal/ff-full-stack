@@ -1,16 +1,32 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 
 import classes from "./ProductDetailComponent.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../features/cartSlice/cartSlice";
-import img from "../../assets/products/DUMMY_PRODUCTS/1.jpg";
+import Select from "react-select";
 
-const ProductDetailComponent = ({data}) => {
-  const {product} = data;
-  console.log(product);
+const ProductDetailComponent = ({ data }) => {
+  const [selectedFlavour, setSelectedFlavour] = useState();
+  const [selectedWeight, setSelectedWeight] = useState();
+
+  const { product } = data;
   const dispatch = useDispatch();
+
+  const allflavours = product?.flavour?.map((flavour) => ({
+    value: `${flavour}`,
+    label: `${flavour}`,
+  }));
+  console.log(allflavours);
+  console.log(selectedFlavour);
+
+  const allWeights = product?.weight?.map((flavour) => ({
+    value: `${flavour}`,
+    label: `${flavour}`,
+  }));
+  console.log(allWeights);
+  console.log(selectedWeight);
 
   // const {
   //   name,
@@ -22,10 +38,6 @@ const ProductDetailComponent = ({data}) => {
   //   weight,
   //   flavour,
   // } = product;
-
-  console.log(product?.name);
-
-  // console.log(product);
 
   const id = product?.id;
   const name = product?.name;
@@ -39,8 +51,11 @@ const ProductDetailComponent = ({data}) => {
         name,
         price,
         desc,
+        flavour: selectedFlavour,
+        weight: selectedWeight,
       })
     );
+    console.log(name, selectedFlavour, selectedWeight);
   };
 
   return (
@@ -72,23 +87,21 @@ const ProductDetailComponent = ({data}) => {
         <div
           className={classes["ProductDetailPage-flavour-and-weight-container"]}
         >
-          <select
-            className={classes["ProductDetailPage-flavour-and-weight"]}
-            name="flavor"
-          >
-            {product?.flavour?.map((flavor) => (
-              <option className={classes["option"]}>{flavor}</option>
-            ))}
-          </select>
+          <Select
+            fullWidth
+            options={allflavours}
+            placeholder="Select  a flavour..."
+            value={selectedFlavour}
+            onChange={(selectedOption) => setSelectedFlavour(selectedOption)}
+          />
 
-          <select
-            className={classes["ProductDetailPage-flavour-and-weight"]}
-            name="flavor"
-          >
-            {product?.weight?.map((weight) => (
-              <option className={classes["option"]}>{weight}</option>
-            ))}
-          </select>
+          <Select
+            fullWidth
+            options={allWeights}
+            placeholder="Select  a weight..."
+            value={selectedWeight}
+            onChange={(selectedOption) => setSelectedWeight(selectedOption)}
+          />
         </div>
         <div className={classes["ProductDetailPage-ctaBtn-container"]}>
           <button
@@ -98,11 +111,14 @@ const ProductDetailComponent = ({data}) => {
             ADD TO CART
           </button>
         </div>
-        {product?.nutritionImage && 
+        {product?.nutritionImage && (
           <div className={classes["ProductDetailPage-nutritionImg"]}>
-            <img src={product?.nutritionImage} alt="⚠ Nutrition Image not Available!" />
+            <img
+              src={product?.nutritionImage}
+              alt="⚠ Nutrition Image not Available!"
+            />
           </div>
-        }
+        )}
       </div>
     </div>
   );

@@ -134,7 +134,6 @@ export const getCompaniesThunk = createAsyncThunk(
 export const getSelectedProductThunk = createAsyncThunk(
   "GETProduct/getSelectedProductThunk",
   async (id) => {
-    console.log("Hello from get product by id thunk");
     const response = await fetch(`${API_PATH}/api/products/${id}`, headers);
     const data = await response.json();
     return data;

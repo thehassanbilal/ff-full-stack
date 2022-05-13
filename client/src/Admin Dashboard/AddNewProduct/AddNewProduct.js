@@ -38,6 +38,11 @@ const NewProduct = () => {
     { value: "oreo", label: "Oreo" },
     { value: "vanilla", label: "Vanilla" },
     { value: "tuti fruiti", label: "Tuti Fruiti" },
+    { value: "chocolate", label: "Chocolate" },
+    { value: "Chocolate Peanut Butter", label: "Chocolate Peanut Butter" },
+    { value: "Peanut Butter", label: "Peanut Butter" },
+    { value: "Cinnamon Bun", label: "Cinnamon Bun" },
+    { value: "Cookies and Cream", label: "Cookies and Cream" },
   ];
 
   const supplimentWeights = [

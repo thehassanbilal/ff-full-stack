@@ -28,6 +28,8 @@ const Cart = (props) => {
               id: item.id,
               name: item.name,
               quantity: item.quantity,
+              flavour: item.flavour,
+              weight: item.weight,
               total: item.totalPrice,
               price: item.price,
             }}
