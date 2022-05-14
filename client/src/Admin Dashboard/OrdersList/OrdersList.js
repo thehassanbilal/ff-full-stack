@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
 import {
   getOrdersThunk,
-  orderListData,
 } from "../../features/orderSlice/orderSlice";
 import "./OrdersList.css";
 
@@ -67,10 +66,10 @@ const OrdersList = () => {
                             {product.quantity}
                           </td>
                           <td className="productsListTable-data">
-                            {product.quantity}
+                            {product.flavour}
                           </td>
                           <td className="productsListTable-data">
-                            {product.quantity}
+                            {product.weight}
                           </td>
                           
                         </tr>

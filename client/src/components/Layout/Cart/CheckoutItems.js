@@ -104,7 +104,7 @@ function CheckoutItems() {
     );
     setPopUp(false);
     dispatch(clearCart(null));
-    navigate("/");
+    // navigate("/");
   };
   // -------------------------Total items-------------------------------------------------
 

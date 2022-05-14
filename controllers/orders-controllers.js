@@ -75,6 +75,8 @@ const getOrdersByUserId = async (req, res, next) => {
 };
 
 const createOrder = async (req, res, next) => {
+  console.log("create order envoked!");
+  console.log(req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(

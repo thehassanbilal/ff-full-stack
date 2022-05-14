@@ -14,22 +14,16 @@ const SelectedProductCategory = () => {
 
   let { name } = useParams();
 
-  // const paramsToLowerCase = name.toLowerCase();
-  // const paramsToUpperCase = paramsToLowerCase.charAt(0).toUpperCase() + paramsToLowerCase.slice(1);
+  
   const productCategoryFromParams = name.replaceAll("-", " ");
-
-  console.log(productCategoryFromParams);
 
   const selectedCategory = useSelector(
     (state) => state.productSlice.selectedCategory
   );
-  console.log(selectedCategory);
 
   const products = selectedCategory.products;
-  console.log(products);
 
   useEffect(async () => {
-    console.log("i am in useEffect");
     dispatch(getSelectedCategoryThunk(productCategoryFromParams));
   }, []);
 

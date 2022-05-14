@@ -18,15 +18,21 @@ const ProductDetailComponent = ({ data }) => {
     value: `${flavour}`,
     label: `${flavour}`,
   }));
-  console.log(allflavours);
-  console.log(selectedFlavour);
+  const productFlavourToArray = [selectedFlavour].flat();
+  console.log(productFlavourToArray);
 
-  const allWeights = product?.weight?.map((flavour) => ({
-    value: `${flavour}`,
-    label: `${flavour}`,
+  const productFlavour = productFlavourToArray?.map((flavour) => flavour?.label);
+
+
+  const allWeights = product?.weight?.map((weight) => ({
+    value: `${weight}`,
+    label: `${weight}`,
   }));
-  console.log(allWeights);
-  console.log(selectedWeight);
+  const productWeightToArray = [selectedWeight].flat();
+  console.log(productWeightToArray);
+
+  const productWeight = productWeightToArray?.map((weight) => weight?.label);
+
 
   // const {
   //   name,
@@ -45,17 +51,18 @@ const ProductDetailComponent = ({ data }) => {
   const desc = product?.desc;
 
   const addToCartHandler = () => {
+    console.log(name, productFlavour, productWeight);
     dispatch(
       cartActions.addItemToCart({
         id,
         name,
         price,
         desc,
-        flavour: selectedFlavour,
-        weight: selectedWeight,
+        flavour: productFlavour,
+        weight: productWeight,
       })
     );
-    console.log(name, selectedFlavour, selectedWeight);
+    
   };
 
   return (

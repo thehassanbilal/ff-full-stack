@@ -78,7 +78,7 @@ const NewProduct = () => {
       flavour: productFlavours,
       weight: productWeights,
     };
-    console.log(data);
+    console.log(productFlavours, productWeights);
 
     dispatch(addNewProductThunk(data));
   };

@@ -100,6 +100,7 @@ const getProductsByUserId = async (req, res, next) => {
 // -----------------------Create Product-----------------------------------------
 
 const createProduct = async (req, res, next) => {
+  console.log(req.body);
   const errors = validationResult(req);
   // if (!errors.isEmpty()) {
   //   return next(
