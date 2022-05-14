@@ -200,6 +200,7 @@ const updateProduct = async (req, res, next) => {
 
 
 const deleteProduct = async (req, res, next) => {
+  console.log("delete Product envoked from backend!");
   const productId = req.params.pid;
 
   let product;

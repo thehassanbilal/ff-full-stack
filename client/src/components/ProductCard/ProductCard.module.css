@@ -78,6 +78,10 @@
   margin-top: 5px;
 }
 
+.productCard-product-name{
+  text-overflow: ellipsis;
+}
+
 .productCard-product-name,
 .productCard-product-price,
 .productCard-rating {

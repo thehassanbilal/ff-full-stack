@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {API_URL} from "../services/backendPort";
+import { API_URL } from "../services/backendPort";
 const axios = require("axios");
 
-
-const API_PATH =API_URL;
+const API_PATH = API_URL;
 
 const headers = {
   method: "GET",
@@ -11,6 +10,7 @@ const headers = {
     "Content-Type": "application/json",
   },
 };
+
 const PostHeaders = {
   method: "POST",
   headers: {
@@ -32,7 +32,6 @@ export const addNewProductThunk = createAsyncThunk(
       company,
       desc,
       rating,
-
     },
     thunkAPI
   ) => {
@@ -114,7 +113,10 @@ export const getProductCategoriesThunk = createAsyncThunk(
 export const getSelectedCategoryThunk = createAsyncThunk(
   "GETProduct/getSelectedCategoryThunk",
   async (productCategoryFromParams) => {
-    const response = await fetch(`${API_PATH}/api/products/category/${productCategoryFromParams}`, headers);
+    const response = await fetch(
+      `${API_PATH}/api/products/category/${productCategoryFromParams}`,
+      headers
+    );
     const data = await response.json();
     console.log("according data", data);
     return data;
@@ -140,12 +142,27 @@ export const getSelectedProductThunk = createAsyncThunk(
   }
 );
 
+//--------------------------Delete Product-------------------------
+
+export const deleteProductThunk = createAsyncThunk(
+  "DeleteProduct/deleteProductThunk",
+  async (id) => {
+    console.log("delete Product envoked!");
+    const response = await fetch(`${API_PATH}/api/products/${id}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    return data;
+  }
+);
+
 const productSlice = createSlice({
   name: "prductSlice",
   initialState: {
     productCategories: [],
     selectedCategory: [],
     selectedProduct: {},
+    deleteStatus: [],
   },
   reducer: {
     removeSelectedCategoryProduct: (state, action) => {
@@ -186,11 +203,23 @@ const productSlice = createSlice({
       console.log("rejected");
     },
     // --------------------------------------------------------
-    [getSelectedProductThunk.pending]: (state, action) => {},
+    [getSelectedProductThunk.pending]: (state, action) => {
+      console.log("pending");
+    },
     [getSelectedProductThunk.fulfilled]: (state, action) => {
       return { ...state, selectedProduct: action.payload };
     },
     [getSelectedProductThunk.rejected]: (state, action) => {
+      console.log("rejected");
+    },
+    //-------------------------------------------------------
+    [deleteProductThunk.pending]: (state, action) => {
+      console.log("pending");
+    },
+    [deleteProductThunk.fulfilled]: (state, action) => {
+      return { ...state, deleteState: action.payload };
+    },
+    [deleteProductThunk.rejected]: (state, action) => {
       console.log("rejected");
     },
   },

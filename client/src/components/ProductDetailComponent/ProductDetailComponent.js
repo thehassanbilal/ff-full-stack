@@ -64,6 +64,7 @@ const ProductDetailComponent = ({ data }) => {
     );
     
   };
+  console.log(product?.image);
 
   return (
     <div className={classes["ProductDetailPage-container"]}>

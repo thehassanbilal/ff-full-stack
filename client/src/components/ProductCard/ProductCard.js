@@ -4,8 +4,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../features/cartSlice/cartSlice";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import classes from "./ProductCard.module.css";
+import { deleteProductThunk } from "../../features/productSlice";
 
 function ProductCard({ id, name, price, img }) {
   const dispatch = useDispatch();
@@ -21,6 +24,14 @@ function ProductCard({ id, name, price, img }) {
     );
   };
 
+  const deleteBtnHandler = () => {
+  dispatch(deleteProductThunk(id));
+  }
+
+  const editBtnHandler = () => {
+    dispatch();
+  }
+
   return (
     <div className={classes["productCard-container"]}>
       <div className={classes["productCard-card"]}>
@@ -32,13 +43,16 @@ function ProductCard({ id, name, price, img }) {
             <p className={classes["productCard-product-name"]}>{name}</p>
           </Link>
           <p className={classes["productCard-product-price"]}>RS {price}</p>
-          <p className={classes["productCard-rating"]}>⭐⭐⭐⭐⭐</p>
-          <a
+          {/* <p className={classes["productCard-rating"]}>⭐⭐⭐⭐⭐</p> */}
+          <a  className={classes["productCard-btn"]} onClick={editBtnHandler} >{<EditIcon/>}</a>
+          <a  className={classes["productCard-btn"]} onClick={deleteBtnHandler} >{<DeleteIcon/>}</a>
+
+          {/* <a
             className={classes["productCard-btn"]}
             onClick={() => addToCartHandler(id)}
           >
             Buy Now
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
