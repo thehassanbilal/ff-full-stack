@@ -1,61 +1,94 @@
-import React, { Fragment, useState } from "react";
-import "./newProduct.css";
-import Select from "react-select";
-import { Button, TextField, TextareaAutosize, Grid } from "@material-ui/core";
-import "../../App.css";
-import { DropzoneArea } from "material-ui-dropzone";
-import { addNewProductThunk } from "../../features/productSlice";
-import { useDispatch } from "react-redux";
-import { storage } from "../../../src/firebase";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import React, { Fragment, useEffect, useState } from 'react';
+import './newProduct.css';
+import Select from 'react-select';
+import { Button, TextField, TextareaAutosize, Grid } from '@material-ui/core';
+import '../../App.css';
+import { DropzoneArea } from 'material-ui-dropzone';
+import {
+  addNewProductThunk,
+  getSelectedProductThunk,
+} from '../../features/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { storage } from '../../../src/firebase';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 const NewProduct = () => {
   const dispatch = useDispatch();
   const [selectedFlavours, setSelectedFlavours] = useState([]);
   const [images, setSelectImage] = useState(null);
 
+  //------------------Edit Image Section---------------------------------------------
+
+  const editState = useSelector((state) => state?.productSlice?.editProduct);
+  console.log(editState);
+
+  const productId = editState.map((product) => product?.productId);
+  console.log(productId);
+
+  useEffect(() => {
+    if (productId.length !== 0) {
+      dispatch(getSelectedProductThunk(productId));
+    }
+  }, []);
+
+  const {product} = useSelector(
+    (state) => state?.productSlice?.selectedProduct
+  );
+  console.log(product);
+
+
+
+
+
+
+
+
+
+
+  //----------------------------------------------------------------------------------
+
   const catOptions = [
-    { value: "protein", label: "Protein" },
-    { value: "fatBurner", label: "Fat Burner" },
-    { value: "aminoAcid", label: "Amino Acid" },
-    { value: "preWorkout", label: "Pre Workout" },
-    { value: "postWorkout", label: "Post Workout" },
+    { value: 'protein', label: 'Protein' },
+    { value: 'fatBurner', label: 'Fat Burner' },
+    { value: 'aminoAcid', label: 'Amino Acid' },
+    { value: 'preWorkout', label: 'Pre Workout' },
+    { value: 'postWorkout', label: 'Post Workout' },
   ];
 
   const companyOptions = [
-    { value: "on", label: "On" },
-    { value: "theProteinWorks", label: "The Protein Works" },
-    { value: "jackNeutrition", label: "Jack Neutrition" },
-    { value: "optimumNutrition", label: "Optimum Nutrition" },
-    { value: "rSPNutrition", label: "RSP Nutrition" },
+    { value: 'on', label: 'On' },
+    { value: 'theProteinWorks', label: 'The Protein Works' },
+    { value: 'jackNeutrition', label: 'Jack Neutrition' },
+    { value: 'optimumNutrition', label: 'Optimum Nutrition' },
+    { value: 'rSPNutrition', label: 'RSP Nutrition' },
   ];
 
   const suppOptions = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "oreo", label: "Oreo" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "tuti fruiti", label: "Tuti Fruiti" },
-    { value: "chocolate", label: "Chocolate" },
-    { value: "Chocolate Peanut Butter", label: "Chocolate Peanut Butter" },
-    { value: "Peanut Butter", label: "Peanut Butter" },
-    { value: "Cinnamon Bun", label: "Cinnamon Bun" },
-    { value: "Cookies and Cream", label: "Cookies and Cream" },
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'oreo', label: 'Oreo' },
+    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'tuti fruiti', label: 'Tuti Fruiti' },
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'Chocolate Peanut Butter', label: 'Chocolate Peanut Butter' },
+    { value: 'Peanut Butter', label: 'Peanut Butter' },
+    { value: 'Cinnamon Bun', label: 'Cinnamon Bun' },
+    { value: 'Cookies and Cream', label: 'Cookies and Cream' },
   ];
 
   const supplimentWeights = [
-    { value: "3 lbs", label: "3 lbs" },
-    { value: "5 lbs", label: "5 lbs" },
-    { value: "7 lbs", label: "7 lbs" },
+    { value: '3 lbs', label: '3 lbs' },
+    { value: '5 lbs', label: '5 lbs' },
+    { value: '7 lbs', label: '7 lbs' },
   ];
 
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
+  const [name, setName] = useState('');
+  const [company, setCompany] = useState('');
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(0);
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState('');
   const [category, setCategory] = useState([]);
   const [selectedWeights, setSelectedWeights] = useState([]);
 
@@ -86,7 +119,7 @@ const NewProduct = () => {
   // ------------------Image upload---------------------------
 
   const [imgUrl, setImgUrl] = useState(null);
-   const [progresspercent, setProgresspercent] = useState(0);
+  const [progresspercent, setProgresspercent] = useState(0);
 
   const [nutritionImgUrl, setNutritionImgUrl] = useState(null);
   const [nutritionProgresspercent, setNutritionProgresspercent] = useState(0);
@@ -94,7 +127,7 @@ const NewProduct = () => {
   const [imageUpload, setimageUpload] = useState(null);
 
   const imageHandleSubmit = (e) => {
-    console.log("Image upload envoked!");
+    console.log('Image upload envoked!');
     e.preventDefault();
 
     const file = e.target[0]?.files[0];
@@ -103,7 +136,7 @@ const NewProduct = () => {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -132,7 +165,7 @@ const NewProduct = () => {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -156,7 +189,9 @@ const NewProduct = () => {
   const progressInstance = <ProgressBar now={now} label={`${now}%`} />;
 
   const nutritionNow = nutritionProgresspercent;
-   const nutritionProgressInstance = <ProgressBar now={nutritionNow} label={`${nutritionNow}%`} />;
+  const nutritionProgressInstance = (
+    <ProgressBar now={nutritionNow} label={`${nutritionNow}%`} />
+  );
 
   return (
     <Fragment>
@@ -167,7 +202,11 @@ const NewProduct = () => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Add Product</h1>
+            {productId.length !== 0 ? (
+              <h1>Edit Product</h1>
+            ) : (
+              <h1>Add Product</h1>
+            )}
 
             <div>
               <label className="addProduct-label">Name :</label>
@@ -177,7 +216,7 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="text"
-                placeholder="Product Name"
+                placeholder={product ? `${product.name}` : "Product Name"}
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -191,7 +230,7 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="number"
-                placeholder="Price"
+                placeholder= {product ? `${product.price}` : "Price"}
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
@@ -205,7 +244,7 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="number"
-                placeholder="Rating"
+                placeholder= {product ? `${product.rating}` : "Rating"}
                 required
                 max="5"
                 value={rating}
@@ -218,7 +257,7 @@ const NewProduct = () => {
               <Select
                 fullWidth
                 options={companyOptions}
-                placeholder="Select  a Category..."
+                placeholder={product ? `${product.company}` : "Select a category..."}
                 value={company}
                 onChange={(selectedOption) => setCompany(selectedOption)}
               />
@@ -229,7 +268,7 @@ const NewProduct = () => {
               <TextareaAutosize
                 name="desc"
                 fullWidth
-                placeholder="Product Description"
+                placeholder={product ? `${product.desc}` : "Product Description..."}
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
                 className="handleTextArea"
@@ -241,7 +280,7 @@ const NewProduct = () => {
               <Select
                 fullWidth
                 options={catOptions}
-                placeholder="Select  a Category..."
+                placeholder={product ? `${product.supplementCategory}` : "Select a category..."}
                 value={category}
                 onChange={(selectedOption) => setCategory(selectedOption)}
               />
@@ -252,7 +291,7 @@ const NewProduct = () => {
                 fullWidth
                 isMulti={true}
                 options={suppOptions}
-                placeholder="Select  Flavours..."
+                placeholder={product ? `${product.flavour}` : "Select flavours..."}
                 value={selectedFlavours}
                 onChange={(selectedOption) =>
                   setSelectedFlavours(selectedOption)
@@ -265,14 +304,13 @@ const NewProduct = () => {
               <Select
                 isMulti={true}
                 options={supplimentWeights}
-                placeholder="Select  Weights..."
+                placeholder={product ? `${product.weight}` : "Select weights..."}
                 value={selectedWeights}
                 onChange={(selectedOption) =>
                   setSelectedWeights(selectedOption)
                 }
               />
             </div>
-
 
             <Button id="createProductBtn" type="submit" className="btn-reset">
               Create
@@ -305,15 +343,18 @@ const NewProduct = () => {
             {imgUrl && (
               <div className="imageuploaded-successfully">
                 <p>
-                  Uploaded Successfully <DoneOutlineIcon />{" "}
+                  Uploaded Successfully <DoneOutlineIcon />{' '}
                 </p>
                 <img src={imgUrl} alt="uploaded file" height={200} />
               </div>
             )}
           </div>
-                <hr/>
+          <hr />
           <div className="product-ImageUpload-container">
-            <form onSubmit={nutriitonImageHandleSubmit} className="form-productImage">
+            <form
+              onSubmit={nutriitonImageHandleSubmit}
+              className="form-productImage"
+            >
               <label className="addProduct-label">Nutrition Image :</label>
               <input type="file" />
               {!nutritionImgUrl && (
@@ -336,7 +377,7 @@ const NewProduct = () => {
             {nutritionImgUrl && (
               <div className="imageuploaded-successfully">
                 <p>
-                  Uploaded Successfully <DoneOutlineIcon />{" "}
+                  Uploaded Successfully <DoneOutlineIcon />{' '}
                 </p>
                 <img src={nutritionImgUrl} alt="uploaded file" height={200} />
               </div>

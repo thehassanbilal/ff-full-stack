@@ -118,7 +118,6 @@ export const getSelectedCategoryThunk = createAsyncThunk(
       headers
     );
     const data = await response.json();
-    console.log("according data", data);
     return data;
   }
 );
@@ -142,12 +141,76 @@ export const getSelectedProductThunk = createAsyncThunk(
   }
 );
 
+//--------------------------Update Product-------------------------
+
+export const eidtProductThunk = createAsyncThunk(
+  "PATCHProduct/editProductThunk",
+  async (
+    {
+      id,
+      name,
+      price,
+      supplementCategory,
+      image,
+      nutritionImage,
+      flavour,
+      weight,
+      company,
+      desc,
+      rating,
+    },
+    thunkAPI
+  ) => {
+    try {
+      const response = await fetch(`${API_PATH}/api/products/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          price,
+          supplementCategory,
+          image,
+          nutritionImage,
+          flavour,
+          weight,
+          company,
+          desc,
+          rating,
+        }),
+      });
+
+      console.log("name", name);
+      console.log("price", price);
+      console.log("supplement category", supplementCategory);
+      console.log("flavour", flavour);
+      console.log("weight", weight);
+      console.log("company", company);
+      console.log("desc", desc);
+      console.log("rating", rating);
+      console.log("image", image);
+      console.log("nutritionImage", nutritionImage);
+
+      let data = await response.json();
+      console.log("data", data);
+      // if (response.status === 200) {
+      //   return { ...data, username: username, email: email };
+      // } else {
+      //   return thunkAPI.rejectWithValue(data);
+      // }
+    } catch (e) {
+      console.log("Error", e.response.data);
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
 //--------------------------Delete Product-------------------------
 
 export const deleteProductThunk = createAsyncThunk(
   "DeleteProduct/deleteProductThunk",
   async (id) => {
-    console.log("delete Product envoked!");
     const response = await fetch(`${API_PATH}/api/products/${id}`, {
       method: "DELETE",
     });
@@ -163,8 +226,16 @@ const productSlice = createSlice({
     selectedCategory: [],
     selectedProduct: {},
     deleteStatus: [],
+    editProduct: [],
   },
-  reducer: {
+  reducers: {
+    editProductFunc(state, action) {
+       const productId = action.payload;
+      state.editProduct.push({ productId });
+    },
+    clearState(state, action){
+      state.editProduct = [];
+    },
     removeSelectedCategoryProduct: (state, action) => {
       return { ...state, selectedCategory: [] };
     },
@@ -224,7 +295,11 @@ const productSlice = createSlice({
     },
   },
 });
-export const { removeSelectedCategoryProduct, removeSelectedProduct } =
-  productSlice.actions;
+export const {
+  removeSelectedCategoryProduct,
+  removeSelectedProduct,
+  editProductFunc,
+  clearState,
+} = productSlice.actions;
 
 export default productSlice.reducer;

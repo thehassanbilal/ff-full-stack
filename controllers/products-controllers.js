@@ -151,6 +151,7 @@ const createProduct = async (req, res, next) => {
 };
 
 const updateProduct = async (req, res, next) => {
+  console.log("update product envoked form backend!");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     throw new HttpError("Invalid inputs passed, please check your data.", 422);
@@ -200,7 +201,6 @@ const updateProduct = async (req, res, next) => {
 
 
 const deleteProduct = async (req, res, next) => {
-  console.log("delete Product envoked from backend!");
   const productId = req.params.pid;
 
   let product;

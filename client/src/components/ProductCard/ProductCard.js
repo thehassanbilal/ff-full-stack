@@ -1,17 +1,20 @@
 /** @format */
 
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { cartActions } from "../../features/cartSlice/cartSlice";
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import classes from "./ProductCard.module.css";
-import { deleteProductThunk } from "../../features/productSlice";
+// import { productActions } from "../../features/productSlice";
+import { deleteProductThunk, productActions } from "../../features/productSlice";
+import { editProductFunc } from "../../features/productSlice";
 
 function ProductCard({ id, name, price, img }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addToCartHandler = (id) => {
     dispatch(
@@ -25,12 +28,13 @@ function ProductCard({ id, name, price, img }) {
   };
 
   const deleteBtnHandler = () => {
-  dispatch(deleteProductThunk(id));
-  }
+    dispatch(deleteProductThunk(id));
+  };
 
   const editBtnHandler = () => {
-    dispatch();
-  }
+    dispatch(editProductFunc(id));
+    navigate("/dashboard");
+  };
 
   return (
     <div className={classes["productCard-container"]}>
@@ -44,8 +48,12 @@ function ProductCard({ id, name, price, img }) {
           </Link>
           <p className={classes["productCard-product-price"]}>RS {price}</p>
           {/* <p className={classes["productCard-rating"]}>⭐⭐⭐⭐⭐</p> */}
-          <a  className={classes["productCard-btn"]} onClick={editBtnHandler} >{<EditIcon/>}</a>
-          <a  className={classes["productCard-btn"]} onClick={deleteBtnHandler} >{<DeleteIcon/>}</a>
+          <a className={classes["productCard-btn"]} onClick={editBtnHandler}>
+            {<EditIcon />}
+          </a>
+          <a className={classes["productCard-btn"]} onClick={deleteBtnHandler}>
+            {<DeleteIcon />}
+          </a>
 
           {/* <a
             className={classes["productCard-btn"]}
