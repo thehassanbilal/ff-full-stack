@@ -9,6 +9,7 @@ const productSchema = new Schema({
     image: {type: String, required: true},
     nutritionImage: {type: String, required: true},
     desc: { type: String, required: true},
+    company: { type: String, required : true},
     rating: { type: Number, required: true},
     supplementCategory: { type: String, required: true},
     flavour: [{ type: String, required: true}],

@@ -226,15 +226,15 @@ const productSlice = createSlice({
     selectedCategory: [],
     selectedProduct: {},
     deleteStatus: [],
-    editProduct: [],
+    editProduct: "",
   },
   reducers: {
     editProductFunc(state, action) {
        const productId = action.payload;
-      state.editProduct.push({ productId });
+      state.editProduct = productId ;
     },
     clearState(state, action){
-      state.editProduct = [];
+      state.editProduct = "";
     },
     removeSelectedCategoryProduct: (state, action) => {
       return { ...state, selectedCategory: [] };

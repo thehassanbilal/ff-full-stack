@@ -21,11 +21,7 @@ const NewProduct = () => {
 
   //------------------Edit Image Section---------------------------------------------
 
-  const editState = useSelector((state) => state?.productSlice?.editProduct);
-  console.log(editState);
-
-  const productId = editState.map((product) => product?.productId);
-  console.log(productId);
+  const productId = useSelector((state) => state?.productSlice?.editProduct);
 
   useEffect(() => {
     if (productId.length !== 0) {
@@ -98,6 +94,17 @@ const NewProduct = () => {
     const categoryName = category.label;
     const productWeights = selectedWeights.map((weight) => weight.label);
     const productFlavours = selectedFlavours.map((flavour) => flavour.label);
+
+    const editedData = {
+      name : "",
+      price: parseFloat(""),
+      rating : parseFloat(""),
+      desc: "",
+      company: "",
+      supplementCategory: "",
+      flavour: "",
+      weight: ""
+    }
 
     const data = {
       name,
@@ -216,7 +223,9 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="text"
-                placeholder={product ? `${product.name}` : "Product Name"}
+                // value={this?.name}
+                // placeholder={product ? `${product?.name}` : "Product Name"}
+                // helperText="this"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -230,7 +239,7 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="number"
-                placeholder= {product ? `${product.price}` : "Price"}
+                placeholder= {product ? `${product?.price}` : "Price"}
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
@@ -318,7 +327,7 @@ const NewProduct = () => {
           </form>
         </div>
 
-        <div className="imageupload-section">
+        {!product && <div className="imageupload-section">
           <div className="product-ImageUpload-container">
             <form onSubmit={imageHandleSubmit} className="form-productImage">
               <label className="addProduct-label">Product Image :</label>
@@ -383,7 +392,7 @@ const NewProduct = () => {
               </div>
             )}
           </div>
-        </div>
+        </div>}
       </div>
     </Fragment>
   );

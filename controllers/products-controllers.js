@@ -113,8 +113,9 @@ const createProduct = async (req, res, next) => {
     desc,
     price,
     rating,
-    image,
-    nutritionImage,
+    company,
+    // image,
+    // nutritionImage,
     supplementCategory,
     flavour,
     weight,
@@ -128,6 +129,7 @@ const createProduct = async (req, res, next) => {
     price,
     image,
     nutritionImage,
+    company,
     desc,
     rating,
     supplementCategory : supplementCategoryUppercaseName,
@@ -176,6 +178,7 @@ const updateProduct = async (req, res, next) => {
   product.desc = desc;
   product.price = price;
   product.rating = rating;
+  product.company = company;
   product.image = image;
   product.nutritionImage = nutritionImage;
   product.supplementCategory = supplementCategory;

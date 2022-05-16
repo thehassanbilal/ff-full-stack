@@ -16,9 +16,7 @@ export default function () {
   const [allProducts, setAllProducts] = useState(false);
   const [viewOrder, SetviewOrder] = useState(false);
 
-  const editState = useSelector((state) => state.productSlice.editProduct);
-
-  const productId = editState.map((product) => product.productId);
+  const productId = useSelector((state) => state.productSlice.editProduct);
 
   if(productId.length !== 0) {
     return <AddNewProduct/>
