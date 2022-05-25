@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSelectedCategoryThunk } from "../../../features/productSlice";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import "../../../App.css";
+import LoadingSpinner from "../../../components/Spinner/LoadingSpinner";
 
 const SelectedProductCategory = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,16 @@ const SelectedProductCategory = () => {
   const productCategoryFromParams = name.replaceAll("-", " ");
 
   const selectedCategory = useSelector(
-    (state) => state.productSlice.selectedCategory
+    (state) => state?.productSlice?.selectedCategory
   );
+
+  const isLoading = useSelector(
+    (state) => state?.productSlice?.isLoading
+  );
+
+  console.log(isLoading);
+
+  // dispatch()
 
   const products = selectedCategory.products;
 
@@ -37,7 +46,7 @@ const SelectedProductCategory = () => {
         <h1 className="pricingSection-heading line-divider">
           {productCategoryFromParams}
         </h1>
-
+        {isLoading && <LoadingSpinner/>}
         <div className="SelectedProductCategory-products">
           {products?.map((product) => {
             return (

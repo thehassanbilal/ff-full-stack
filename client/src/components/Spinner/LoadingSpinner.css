@@ -1,0 +1,19 @@
+.loading-spinner-container{
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 30px;
+}
+
+.loading-spinner{
+
+}
+
+.loading-spinner-text{
+    margin: 10px;
+}
+
+.loading-spinner-detail{
+    text-align: center;
+    margin: auto;
+}

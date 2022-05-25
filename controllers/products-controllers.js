@@ -47,6 +47,7 @@ const getProductById = async (req, res, next) => {
 
 const getProductByCategory = async (req, res, next) => {
   const productCategory = req.params.name;
+  console.log(productCategory);
   let product;
   try {
     product = await Product.find({ supplementCategory: productCategory });
@@ -114,8 +115,8 @@ const createProduct = async (req, res, next) => {
     price,
     rating,
     company,
-    // image,
-    // nutritionImage,
+    image,
+    nutritionImage,
     supplementCategory,
     flavour,
     weight,
@@ -152,20 +153,23 @@ const createProduct = async (req, res, next) => {
   res.status(201).json({ product: createdProduct });
 };
 
+//-------------------Update Product----------------------------------------------------
+
 const updateProduct = async (req, res, next) => {
   console.log("update product envoked form backend!");
+  console.log(req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     throw new HttpError("Invalid inputs passed, please check your data.", 422);
   }
 
-  const { name, desc, price, rating, supplementCategory } = req.body;
+  const { name, desc, price, rating, supplementCategory, flavour, weight, company } = req.body;
   const productId = req.params.pid;
+  console.log(productId);
 
   let product;
   try {
     product = await Product.findById(productId);
-    console.log(product);
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not update product.",
@@ -179,8 +183,8 @@ const updateProduct = async (req, res, next) => {
   product.price = price;
   product.rating = rating;
   product.company = company;
-  product.image = image;
-  product.nutritionImage = nutritionImage;
+  // product.image = image;
+  // product.nutritionImage = nutritionImage;
   product.supplementCategory = supplementCategory;
   product.flavour = flavour;
   product.weight = weight;

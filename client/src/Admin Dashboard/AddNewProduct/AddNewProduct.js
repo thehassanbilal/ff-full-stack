@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import './newProduct.css';
 import Select from 'react-select';
-import { Button, TextField, TextareaAutosize, Grid } from '@material-ui/core';
+import { Button, TextField, TextareaAutosize } from '@material-ui/core';
 import '../../App.css';
-import { DropzoneArea } from 'material-ui-dropzone';
 import {
   addNewProductThunk,
+  editProductThunk,
   getSelectedProductThunk,
 } from '../../features/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,6 @@ import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 const NewProduct = () => {
   const dispatch = useDispatch();
   const [selectedFlavours, setSelectedFlavours] = useState([]);
-  const [images, setSelectImage] = useState(null);
 
   //------------------Edit Image Section---------------------------------------------
 
@@ -32,16 +31,24 @@ const NewProduct = () => {
   const {product} = useSelector(
     (state) => state?.productSlice?.selectedProduct
   );
+
   console.log(product);
 
+  const [nameEdit, setNameEdit] = useState(product?.name);
+  // setNameEdit(product?.name);
+  console.log(nameEdit);
+  const [companyEdit, setCompanyEdit] = useState(product?.company);
+  const [priceEdit, setPriceEdit] = useState(product?.price);
+  const [ratingEdit, setRatingEdit] = useState(product?.rating);
+  const [descEdit, setDescEdit] = useState(product?.desc);
+  const [categoryEdit, setCategoryEdit] = useState(product?.supplementCategory);
+  const [flavourEdit, setFlavourEdit] = useState([product?.flavour]);
+  const [selectedWeightsEdit, setSelectedWeightsEdit] = useState(
+   [product?.weight]
+  );
 
-
-
-
-
-
-
-
+  const id = product?.id;
+  const productCategory = product?.supplementCategory;
 
   //----------------------------------------------------------------------------------
 
@@ -88,23 +95,36 @@ const NewProduct = () => {
   const [category, setCategory] = useState([]);
   const [selectedWeights, setSelectedWeights] = useState([]);
 
+  const editProductSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const companyName = companyEdit.label;
+    const categoryName = categoryEdit.label.toUpperCase();
+    const productWeights = selectedWeightsEdit.map((weight) => weight.label);
+    const productFlavours = flavourEdit.map((flavour) => flavour.label);
+
+    const editedData = {
+      id,
+      name : nameEdit,
+      price: parseFloat(priceEdit),
+      rating: parseFloat(ratingEdit),
+      desc: descEdit,
+      company: companyName,
+      supplementCategory: categoryName,
+      flavour: productFlavours,
+      weight: productWeights,
+    };
+
+    dispatch(editProductThunk(editedData));
+  };
+
   const createProductSubmitHandler = async (e) => {
     e.preventDefault();
+
     const companyName = company.label;
     const categoryName = category.label;
     const productWeights = selectedWeights.map((weight) => weight.label);
     const productFlavours = selectedFlavours.map((flavour) => flavour.label);
-
-    const editedData = {
-      name : "",
-      price: parseFloat(""),
-      rating : parseFloat(""),
-      desc: "",
-      company: "",
-      supplementCategory: "",
-      flavour: "",
-      weight: ""
-    }
 
     const data = {
       name,
@@ -112,13 +132,12 @@ const NewProduct = () => {
       rating: parseFloat(rating),
       desc,
       company: companyName,
-      supplementCategory: categoryName,
+      supplementCategory: categoryName.toUpperCase(),
       image: imgUrl,
       nutritionImage: nutritionImgUrl,
       flavour: productFlavours,
       weight: productWeights,
     };
-    console.log(productFlavours, productWeights);
 
     dispatch(addNewProductThunk(data));
   };
@@ -207,7 +226,9 @@ const NewProduct = () => {
           <form
             className="createProductForm"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={
+              product ? editProductSubmitHandler : createProductSubmitHandler
+            }
           >
             {productId.length !== 0 ? (
               <h1>Edit Product</h1>
@@ -223,12 +244,15 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="text"
-                // value={this?.name}
-                // placeholder={product ? `${product?.name}` : "Product Name"}
-                // helperText="this"
+                placeholder="Product Name"
                 required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                // value={product ? nameEdit : name}
+                value={nameEdit}
+                onChange={
+                  product
+                    ? (e) => setNameEdit(e?.target?.value)
+                    : (e) => setName(e?.target?.value)
+                }
               />
             </div>
             <div>
@@ -239,10 +263,14 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="number"
-                placeholder= {product ? `${product?.price}` : "Price"}
+                placeholder="Price"
                 required
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={product ? priceEdit : price}
+                onChange={
+                  product
+                    ? (e) => setPriceEdit(e.target.value)
+                    : (e) => setPrice(e.target.value)
+                }
               />
             </div>
             <div>
@@ -253,11 +281,15 @@ const NewProduct = () => {
                 className="set-outline"
                 variant="outlined"
                 type="number"
-                placeholder= {product ? `${product.rating}` : "Rating"}
+                placeholder="Rating"
                 required
                 max="5"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
+                value={product ? ratingEdit : rating}
+                onChange={
+                  product
+                    ? (e) => setRatingEdit(e.target.value)
+                    : (e) => setRating(e.target.value)
+                }
               />
             </div>
 
@@ -266,9 +298,13 @@ const NewProduct = () => {
               <Select
                 fullWidth
                 options={companyOptions}
-                placeholder={product ? `${product.company}` : "Select a category..."}
-                value={company}
-                onChange={(selectedOption) => setCompany(selectedOption)}
+                placeholder="Select a category..."
+                value={product ? companyEdit : company}
+                onChange={
+                  product
+                    ? (e) => setCompanyEdit(e.target.value)
+                    : (e) => setCompany(e.target.value)
+                }
               />
             </div>
 
@@ -277,10 +313,15 @@ const NewProduct = () => {
               <TextareaAutosize
                 name="desc"
                 fullWidth
-                placeholder={product ? `${product.desc}` : "Product Description..."}
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
+                placeholder="Product Description..."
+                value={product ? descEdit : desc}
+                onChange={
+                  product
+                    ? (e) => setDescEdit(e.target.value)
+                    : (e) => setDesc(e.target.value)
+                }
                 className="handleTextArea"
+                style={{ resize: 'vertical', overflow: 'auto' }}
               ></TextareaAutosize>
             </div>
 
@@ -289,9 +330,12 @@ const NewProduct = () => {
               <Select
                 fullWidth
                 options={catOptions}
-                placeholder={product ? `${product.supplementCategory}` : "Select a category..."}
-                value={category}
-                onChange={(selectedOption) => setCategory(selectedOption)}
+                placeholder={product ? productCategory : 'Select a category...'}
+                onChange={
+                  product
+                    ? (e) => setCategoryEdit(e.target.value)
+                    : (e) => setCategory(e.target.value)
+                }
               />
             </div>
             <div>
@@ -300,10 +344,13 @@ const NewProduct = () => {
                 fullWidth
                 isMulti={true}
                 options={suppOptions}
-                placeholder={product ? `${product.flavour}` : "Select flavours..."}
-                value={selectedFlavours}
-                onChange={(selectedOption) =>
-                  setSelectedFlavours(selectedOption)
+                placeholder={
+                  product ? `${product.flavour}` : 'Select flavours...'
+                }
+                onChange={
+                  product
+                    ? (e) => setFlavourEdit(e.target.value)
+                    : (e) => setSelectedFlavours(e.target.value)
                 }
               />
             </div>
@@ -313,10 +360,14 @@ const NewProduct = () => {
               <Select
                 isMulti={true}
                 options={supplimentWeights}
-                placeholder={product ? `${product.weight}` : "Select weights..."}
-                value={selectedWeights}
-                onChange={(selectedOption) =>
-                  setSelectedWeights(selectedOption)
+                placeholder={
+                  product ? `${product.weight}` : 'Select weights...'
+                }
+                value={product ? selectedWeightsEdit : selectedWeights}
+                onChange={
+                  product
+                    ? (e) => setSelectedWeightsEdit(e?.target?.value)
+                    : (e) => setSelectedWeights(e?.target?.value)
                 }
               />
             </div>
@@ -327,72 +378,74 @@ const NewProduct = () => {
           </form>
         </div>
 
-        {!product && <div className="imageupload-section">
-          <div className="product-ImageUpload-container">
-            <form onSubmit={imageHandleSubmit} className="form-productImage">
-              <label className="addProduct-label">Product Image :</label>
-              <input type="file" />
+        {!product && (
+          <div className="imageupload-section">
+            <div className="product-ImageUpload-container">
+              <form onSubmit={imageHandleSubmit} className="form-productImage">
+                <label className="addProduct-label">Product Image :</label>
+                <input type="file" />
+                {!imgUrl && (
+                  <button className="btn-uploadImage" type="submit">
+                    Upload
+                  </button>
+                )}
+              </form>
+
               {!imgUrl && (
-                <button className="btn-uploadImage" type="submit">
-                  Upload
-                </button>
-              )}
-            </form>
-
-            {!imgUrl && (
-              <div className="outerbar">
-                <div
-                  className="innerbar"
-                  style={{ width: `${progresspercent}%` }}
-                >
-                  {progressInstance}
+                <div className="outerbar">
+                  <div
+                    className="innerbar"
+                    style={{ width: `${progresspercent}%` }}
+                  >
+                    {progressInstance}
+                  </div>
                 </div>
-              </div>
-            )}
-            {imgUrl && (
-              <div className="imageuploaded-successfully">
-                <p>
-                  Uploaded Successfully <DoneOutlineIcon />{' '}
-                </p>
-                <img src={imgUrl} alt="uploaded file" height={200} />
-              </div>
-            )}
-          </div>
-          <hr />
-          <div className="product-ImageUpload-container">
-            <form
-              onSubmit={nutriitonImageHandleSubmit}
-              className="form-productImage"
-            >
-              <label className="addProduct-label">Nutrition Image :</label>
-              <input type="file" />
+              )}
+              {imgUrl && (
+                <div className="imageuploaded-successfully">
+                  <p>
+                    Uploaded Successfully <DoneOutlineIcon />
+                  </p>
+                  <img src={imgUrl} alt="uploaded file" height={200} />
+                </div>
+              )}
+            </div>
+            <hr />
+            <div className="product-ImageUpload-container">
+              <form
+                onSubmit={nutriitonImageHandleSubmit}
+                className="form-productImage"
+              >
+                <label className="addProduct-label">Nutrition Image :</label>
+                <input type="file" />
+                {!nutritionImgUrl && (
+                  <button className="btn-uploadImage" type="submit">
+                    Upload
+                  </button>
+                )}
+              </form>
+
               {!nutritionImgUrl && (
-                <button className="btn-uploadImage" type="submit">
-                  Upload
-                </button>
-              )}
-            </form>
-
-            {!nutritionImgUrl && (
-              <div className="outerbar">
-                <div
-                  className="innerbar"
-                  style={{ width: `${nutritionProgresspercent}%` }}
-                >
-                  {nutritionProgressInstance}
+                <div className="outerbar">
+                  <div
+                    className="innerbar"
+                    style={{ width: `${nutritionProgresspercent}%` }}
+                  >
+                    {nutritionProgressInstance}
+                  </div>
                 </div>
-              </div>
-            )}
-            {nutritionImgUrl && (
-              <div className="imageuploaded-successfully">
-                <p>
-                  Uploaded Successfully <DoneOutlineIcon />{' '}
-                </p>
-                <img src={nutritionImgUrl} alt="uploaded file" height={200} />
-              </div>
-            )}
+              )}
+              {nutritionImgUrl && (
+                <div className="imageuploaded-successfully">
+                  <p>
+                    Uploaded Successfully <DoneOutlineIcon />{' '}
+                  </p>
+                  <img src={nutritionImgUrl} alt="uploaded file" height={200} />
+                </div>
+              )}
+            </div>
           </div>
-        </div>}
+        )}
       </div>
     </Fragment>
   );

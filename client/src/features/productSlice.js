@@ -1,25 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { API_URL } from "../services/backendPort";
-const axios = require("axios");
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { API_URL } from '../services/backendPort';
+const axios = require('axios');
 
 const API_PATH = API_URL;
 
 const headers = {
-  method: "GET",
+  method: 'GET',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 };
 
 const PostHeaders = {
-  method: "POST",
+  method: 'POST',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 };
 // ----------------------------AddNewProduct----------------------------------
 export const addNewProductThunk = createAsyncThunk(
-  "POSTProduct/addProductThunk",
+  'POSTProduct/addProductThunk',
   async (
     {
       name,
@@ -36,25 +36,23 @@ export const addNewProductThunk = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      //   const formData = new FormData();
-      //   formData.append("name", name);
-      //   formData.append("price", price);
-      //   formData.append("supplementCategory", supplementCategory);
-      //   // formData.append("images", images);
-      //   formData.append("flavour", flavour);
-      //   formData.append("weight", weight);
-      //   formData.append("company", company);
-      //   formData.append("desc", desc);
-      //   formData.append("rating", rating);
-
-      //   for (let [key, value] of formData) {
-      //     console.log(`${key}: ${value}`);
-      //   }
-
+      console.log('add product enkoked!');
+      console.log(
+        name,
+        price,
+        supplementCategory,
+        image,
+        nutritionImage,
+        flavour,
+        weight,
+        company,
+        desc,
+        rating
+      );
       const response = await fetch(`${API_PATH}/api/products`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
@@ -70,26 +68,26 @@ export const addNewProductThunk = createAsyncThunk(
         }),
       });
 
-      console.log("name", name);
-      console.log("price", price);
-      console.log("supplement category", supplementCategory);
-      console.log("flavour", flavour);
-      console.log("weight", weight);
-      console.log("company", company);
-      console.log("desc", desc);
-      console.log("rating", rating);
-      console.log("image", image);
-      console.log("nutritionImage", nutritionImage);
+      console.log('name', name);
+      console.log('price', price);
+      console.log('supplement category', supplementCategory);
+      console.log('flavour', flavour);
+      console.log('weight', weight);
+      console.log('company', company);
+      console.log('desc', desc);
+      console.log('rating', rating);
+      console.log('image', image);
+      console.log('nutritionImage', nutritionImage);
 
       let data = await response.json();
-      console.log("data", data);
+      console.log('data', data);
       // if (response.status === 200) {
       //   return { ...data, username: username, email: email };
       // } else {
       //   return thunkAPI.rejectWithValue(data);
       // }
     } catch (e) {
-      console.log("Error", e.response.data);
+      console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
     }
   }
@@ -98,7 +96,7 @@ export const addNewProductThunk = createAsyncThunk(
 // ----------------------------------Suppliment Categories-----------------
 
 export const getProductCategoriesThunk = createAsyncThunk(
-  "GETProduct/getProductByCategoryThunk",
+  'GETProduct/getProductByCategoryThunk',
   async () => {
     const response = await fetch(
       `${API_PATH}/api/supplement-categories`,
@@ -111,7 +109,7 @@ export const getProductCategoriesThunk = createAsyncThunk(
 // ----------------------------------One Suppliment Category---------------------//
 
 export const getSelectedCategoryThunk = createAsyncThunk(
-  "GETProduct/getSelectedCategoryThunk",
+  'GETProduct/getSelectedCategoryThunk',
   async (productCategoryFromParams) => {
     const response = await fetch(
       `${API_PATH}/api/products/category/${productCategoryFromParams}`,
@@ -123,7 +121,7 @@ export const getSelectedCategoryThunk = createAsyncThunk(
 );
 // ----------------------------------Comapanies Thunk-----------------
 export const getCompaniesThunk = createAsyncThunk(
-  "GETProduct/getCompaniesThunk",
+  'GETProduct/getCompaniesThunk',
   async () => {
     const response = await fetch(`${API_PATH}/companies`, headers);
     const data = await response.json();
@@ -133,7 +131,7 @@ export const getCompaniesThunk = createAsyncThunk(
 
 // ----------------------------------One Product Thunk-----------------
 export const getSelectedProductThunk = createAsyncThunk(
-  "GETProduct/getSelectedProductThunk",
+  'GETProduct/getSelectedProductThunk',
   async (id) => {
     const response = await fetch(`${API_PATH}/api/products/${id}`, headers);
     const data = await response.json();
@@ -143,8 +141,8 @@ export const getSelectedProductThunk = createAsyncThunk(
 
 //--------------------------Update Product-------------------------
 
-export const eidtProductThunk = createAsyncThunk(
-  "PATCHProduct/editProductThunk",
+export const editProductThunk = createAsyncThunk(
+  'PATCHProduct/editProductThunk',
   async (
     {
       id,
@@ -163,9 +161,9 @@ export const eidtProductThunk = createAsyncThunk(
   ) => {
     try {
       const response = await fetch(`${API_PATH}/api/products/${id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
@@ -181,26 +179,27 @@ export const eidtProductThunk = createAsyncThunk(
         }),
       });
 
-      console.log("name", name);
-      console.log("price", price);
-      console.log("supplement category", supplementCategory);
-      console.log("flavour", flavour);
-      console.log("weight", weight);
-      console.log("company", company);
-      console.log("desc", desc);
-      console.log("rating", rating);
-      console.log("image", image);
-      console.log("nutritionImage", nutritionImage);
+      console.log('name', name);
+      console.log('price', price);
+      console.log('supplement category', supplementCategory);
+      console.log('flavour', flavour);
+      console.log('weight', weight);
+      console.log('company', company);
+      console.log('desc', desc);
+      console.log('rating', rating);
+      console.log('image', image);
+      console.log('nutritionImage', nutritionImage);
 
       let data = await response.json();
-      console.log("data", data);
+      console.log('data', data);
+
       // if (response.status === 200) {
       //   return { ...data, username: username, email: email };
       // } else {
       //   return thunkAPI.rejectWithValue(data);
       // }
     } catch (e) {
-      console.log("Error", e.response.data);
+      console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
     }
   }
@@ -209,10 +208,10 @@ export const eidtProductThunk = createAsyncThunk(
 //--------------------------Delete Product-------------------------
 
 export const deleteProductThunk = createAsyncThunk(
-  "DeleteProduct/deleteProductThunk",
+  'DeleteProduct/deleteProductThunk',
   async (id) => {
     const response = await fetch(`${API_PATH}/api/products/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     });
     const data = await response.json();
     return data;
@@ -220,21 +219,22 @@ export const deleteProductThunk = createAsyncThunk(
 );
 
 const productSlice = createSlice({
-  name: "prductSlice",
+  name: 'prductSlice',
   initialState: {
     productCategories: [],
     selectedCategory: [],
     selectedProduct: {},
     deleteStatus: [],
-    editProduct: "",
+    editProduct: '',
+    isLoading: false,
   },
   reducers: {
     editProductFunc(state, action) {
-       const productId = action.payload;
-      state.editProduct = productId ;
+      const productId = action.payload;
+      state.editProduct = productId;
     },
-    clearState(state, action){
-      state.editProduct = "";
+    clearState(state, action) {
+      state.editProduct = '';
     },
     removeSelectedCategoryProduct: (state, action) => {
       return { ...state, selectedCategory: [] };
@@ -245,53 +245,62 @@ const productSlice = createSlice({
   },
   extraReducers: {
     [getProductCategoriesThunk.pending]: (state, action) => {
-      console.log("pending");
+      console.log('pending');
     },
     [getProductCategoriesThunk.fulfilled]: (state, action) => {
       return { ...state, productCategories: action.payload };
     },
     [getProductCategoriesThunk.rejected]: (state, action) => {
-      console.log("rejected");
+      console.log('rejected');
     },
     // ------------------------------------------------------
     [getSelectedCategoryThunk.pending]: (state, action) => {
-      console.log("pending");
+      return {...state, isLoading : true}
     },
     [getSelectedCategoryThunk.fulfilled]: (state, action) => {
-      return { ...state, selectedCategory: action.payload };
+      return { ...state,isLoading: false, selectedCategory: action.payload };
     },
     [getSelectedCategoryThunk.rejected]: (state, action) => {
-      console.log("rejected");
     },
     // ------------------------------------------------------
     [getCompaniesThunk.pending]: (state, action) => {
-      console.log("pending");
+      console.log('pending');
     },
     [getCompaniesThunk.fulfilled]: (state, action) => {
       return { ...state, companies: action.payload };
     },
     [getCompaniesThunk.rejected]: (state, action) => {
-      console.log("rejected");
+      console.log('rejected');
     },
     // --------------------------------------------------------
     [getSelectedProductThunk.pending]: (state, action) => {
-      console.log("pending");
+      console.log('pending');
     },
     [getSelectedProductThunk.fulfilled]: (state, action) => {
       return { ...state, selectedProduct: action.payload };
     },
     [getSelectedProductThunk.rejected]: (state, action) => {
-      console.log("rejected");
+      console.log('rejected');
+    },
+    //-------------------------------------------------------//
+     [editProductThunk.pending]: (state, action) => {
+      console.log('pending');
+    },
+    [editProductThunk.fulfilled]: (state, action) => {
+      return { ...state, editProduct : '' };
+    },
+    [editProductThunk.rejected]: (state, action) => {
+      console.log('rejected');
     },
     //-------------------------------------------------------
     [deleteProductThunk.pending]: (state, action) => {
-      console.log("pending");
+      console.log('pending');
     },
     [deleteProductThunk.fulfilled]: (state, action) => {
       return { ...state, deleteState: action.payload };
     },
     [deleteProductThunk.rejected]: (state, action) => {
-      console.log("rejected");
+      console.log('rejected');
     },
   },
 });
