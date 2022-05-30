@@ -78,10 +78,6 @@
   margin-top: 5px;
 }
 
-.productCard-product-name{
-  text-overflow: ellipsis;
-}
-
 .productCard-product-name,
 .productCard-product-price,
 .productCard-rating {
@@ -91,6 +87,14 @@
   margin-block-end: 0px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+}
+
+.productCard-product-name{
+  display:inline-block;
+    width:250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .productCard-product-price,

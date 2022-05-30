@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "../../src/authentication/auth.css";
@@ -16,13 +16,25 @@ function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  const { isFetching, isSuccess, isError, errorMessage } =
+  const { isSuccess, isError, errorMessage } =
     useSelector(userSelector);
 
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
+
+  const { isLoggedIn } = useSelector(userSelector);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+  
+  useEffect(() => {
+    if (isLoggedIn == true) {
+      navigate('/')
+    }
+  })
 
   useEffect(() => {
     return () => {
@@ -32,7 +44,6 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      // toast.error(errorMessage);
       dispatch(clearState());
     }
 
@@ -42,13 +53,15 @@ function Login() {
     }
   }, [isError, isSuccess]);
 
+  
+
   return (
     <>
       <div className="signup-form">
         <form action="/examples/actions/confirmation.php" method="post">
           <div className="form-header">
-            <h2>Sign In</h2>
-            <p>Fill out the Sign-In details!</p>
+            <h2>Log In</h2>
+            <p>Enter your cradentials!</p>
           </div>
 
           <div className="form-group">

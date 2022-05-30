@@ -37,13 +37,20 @@ import dietplan1 from "../assets/dietplan/dietplan1.jpg";
 import dietplan2 from "../assets/dietplan/dietplan2.jpg";
 import dietplan3 from "../assets/dietplan/dietplan3.jpg";
 
-// Import imges for Shop Procuct Categories
+// Import images for Shop Procuct Categories
 import shopProductsCategoriesProteinImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryProteinImg.jpg";
 import shopProductCategoryPostWorkoutImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryPostWorkoutImg.jpg";
 import shopProductCategoryFatBurnerImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryFatBurnerImg.jpg";
 import shopProductCategoryAminoAcidImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryAminoAcidsImg.jpg";
 import shopProductCategoryPreWorkoutImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryPreWorkoutImg.jpg";
 import shopProductCategoryGiftsAndValueSetsImg from "../assets/shop/ProductCategoriesImgs/shopProductCategoryGiftsAndValueSetsImg.jpg";
+
+import proteinBanner from "../assets/shop/BannerImages/protein-banner.webp";
+import postWorkoutBanner from "../assets/shop/BannerImages/postworkout-banner.png";
+import fatBurnerBanner from "../assets/shop/BannerImages/fatburner-banner.webp";
+import aminoAcidBanner from "../assets/shop/BannerImages/aminoacid-banner.webp";
+import preworkoutBanner from "../assets/shop/BannerImages/preworkout-banner.webp";
+import giftsAndValueSetsBanner from "../assets/shop/BannerImages/giftsandvaluesets-banner.png";
 
 // Import imges for Shop Procuct Company Categories
 
@@ -206,7 +213,7 @@ export const pricingsData = [
     logo: <img src={img2} alt="not found" height="80" width="150" />,
     id: 2,
     name: "Home Package",
-    price: 20,
+    price: 4000,
     itemOne: `Customised Meal Plan`,
     itemTwo: `Any Fitness Goal`,
     itemThree: `3 Meal Plans`,
@@ -217,7 +224,7 @@ export const pricingsData = [
     logo: <img src={img3} alt="not found" height="70" width="70" />,
     id: 3,
     name: "Personal Training",
-    price: 45,
+    price: 4500,
     itemOne: `Customized Workouts`,
     itemTwo: `Customized Diet Plans`,
     itemThree: `Best Results`,
@@ -227,7 +234,7 @@ export const pricingsData = [
     logo: <img src={img4} alt="not found" height="60" width="90" />,
     id: 4,
     name: "Customised Target",
-    price: 50,
+    price: 5000,
     itemOne: `Your Own Fitness Goal`,
     itemTwo: `Diet Plan`,
     itemThree: `Training Session`,
@@ -238,13 +245,14 @@ export const pricingsData = [
 //--------------------------------SHOP PRODUCT CATEGORIES------------------------------
 
 export const shopProductCategories = [
-  { name: "PROTEIN", img: shopProductsCategoriesProteinImg, id: 1 },
-  { name: "POST-WORKOUT", img: shopProductCategoryPostWorkoutImg, id: 2 },
-  { name: "FAT-BURNER", img: shopProductCategoryFatBurnerImg, id: 3 },
-  { name: "AMINO-ACID", img: shopProductCategoryAminoAcidImg, id: 4 },
-  { name: "PRE-WORKOUT", img: shopProductCategoryPreWorkoutImg, id: 5 },
+  { name: "PROTEIN", banner: proteinBanner, img: shopProductsCategoriesProteinImg, id: 1 },
+  { name: "POST-WORKOUT", banner: postWorkoutBanner, img: shopProductCategoryPostWorkoutImg, id: 2 },
+  { name: "FAT-BURNER", banner: fatBurnerBanner, img: shopProductCategoryFatBurnerImg, id: 3 },
+  { name: "AMINO-ACID", banner: aminoAcidBanner, img: shopProductCategoryAminoAcidImg, id: 4 },
+  { name: "PRE-WORKOUT", banner: preworkoutBanner, img: shopProductCategoryPreWorkoutImg, id: 5 },
   {
     name: "GUIFTS & VALUE SETS",
+    banner: giftsAndValueSetsBanner,
     img: shopProductCategoryGiftsAndValueSetsImg,
     id: 6,
   },

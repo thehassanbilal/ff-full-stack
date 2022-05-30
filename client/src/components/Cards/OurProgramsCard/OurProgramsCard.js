@@ -36,7 +36,7 @@ const addToCartHandler = () => {
             </span>
           </div>
           <div className="ourProgramCard-title">{props.name}</div>
-          <div className="ourProgramCard-cost">{props.price}</div>
+          <div className="ourProgramCard-cost">RS {props.price}</div>
           <p className="ourProgramCard-desc">{props.desc}</p>
           {props.itemOne &&
             <ul className="ourProgramCard-list">
