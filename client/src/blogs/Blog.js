@@ -1,13 +1,15 @@
 /** @format */
 
-import React from "react";
-import "../blogs/blog.css";
-import post1 from "../../src/assets/Gym/training-1.jpg";
-import post2 from "../../src/assets/Gym/training-2.jpg";
-import post3 from "../../src/assets/Gym/training-3.jpg";
-import post4 from "../assets/dietplan/dietplan1.jpg";
-import post5 from "../assets/dietplan/dietplan2.jpg";
-import post6 from "../assets/dietplan/dietplan3.jpg";
+import React from 'react';
+import '../blogs/blog.css';
+import post1 from '../../src/assets/Gym/training-1.jpg';
+import post2 from '../../src/assets/Gym/training-2.jpg';
+import post3 from '../../src/assets/Gym/training-3.jpg';
+import post4 from '../assets/dietplan/dietplan1.jpg';
+import post5 from '../assets/dietplan/dietplan2.jpg';
+import post6 from '../assets/dietplan/dietplan3.jpg';
+
+import { BlogContent } from '../services/productData';
 
 export default function Blog() {
   return (
@@ -20,7 +22,30 @@ export default function Blog() {
             <p className="pricingSection-title-secondHalf">Intresting Blogs</p>
           </div>
 
-          <div className="row">
+          {/* --------------Blog Cards------------------- */}
+          <section class="cards">
+            {BlogContent?.map((blog) => {
+              return (
+                <article class="card">
+                  <div class="card__info-hover"></div>
+                  <img src={blog.coverImg} />
+                  <a href="#" class="card_link">
+                    <div class="card__img--hover"></div>
+                  </a>
+                  <div class="card__info">
+                    <h3 class="card__title">{blog.title}</h3>
+                    <span class="card__by">
+                      by{' '}
+                      <a href="#" class="card__author" title="author">
+                        Hassan Bilal
+                      </a>
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
+          </section>
+          {/* <div className="row">
             <div className="col-lg-4 col-md-12 mb-4">
               <div className="card">
                 <div
@@ -166,7 +191,7 @@ export default function Blog() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
     </main>

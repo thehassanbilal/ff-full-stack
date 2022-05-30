@@ -4,8 +4,11 @@ import "../Footer/Footer.css";
 import logo from "../../../assets/logo/logo.svg";
 import Flip from "react-reveal/Flip";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../../features/authSlice/authSlice";
 
 const Footer = () => {
+  const { isLoggedIn } = useSelector(userSelector);
   return (
     <>
       <footer className="footer-20192">
@@ -68,9 +71,9 @@ const Footer = () => {
                     </Link>
                   </li>
                    <li>
-                    <Link to="/login">
+                    {!isLoggedIn && <Link to="/login">
                       <a href="#">Admin Only</a>
-                    </Link>
+                    </Link>}
                   </li>
                 </ul>
               </div>
